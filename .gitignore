@@ -23,6 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
+# My files
+API_KEY.js
+src/mocks
+src/assets
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/images,node,windows,linux,macos
