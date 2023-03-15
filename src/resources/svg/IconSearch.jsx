@@ -18,4 +18,4 @@ function IconSearch() {
   )
 }
 
-export default IconSearch
+export { IconSearch }

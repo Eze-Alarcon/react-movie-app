@@ -1,10 +1,11 @@
+/* eslint-disable comma-dangle */
 /* eslint space-before-function-paren: 0 */
 
 import React from 'react'
-import { Form } from './components/login/Form'
+import { Header } from './components/shared/Header'
 
 function App() {
-  return <Form login={false} />
+  return <Header />
 }
 
 export default App

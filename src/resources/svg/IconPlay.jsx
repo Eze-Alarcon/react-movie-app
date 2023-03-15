@@ -18,4 +18,4 @@ function IconPlay() {
   )
 }
 
-export default IconPlay
+export { IconPlay }
