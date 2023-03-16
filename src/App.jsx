@@ -17,11 +17,11 @@ function App() {
     <>
       <header
         id='header_container'
-        className='w-full flex justify-center md:px-6 md:pt-6 lg:flex-col lg:px-0 lg:py-6'
+        className='w-full flex justify-center pt-6 lg:flex-col lg:px-0  relative'
       >
         <Header />
       </header>
-      <main className='w-full mt-6 px-4 md:px-6 lg:px-0 grid gap-6'>
+      <main className='w-full mt-6 grid gap-6 lg:px-0 pb-6'>
         <div className='flex gap-6 items-center'>
           <SearchBar />
         </div>
