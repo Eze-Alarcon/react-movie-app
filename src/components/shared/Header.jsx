@@ -12,18 +12,18 @@ import {
 
 function Header() {
   return (
-    <nav className='bg-darkBlue h-14 w-full flex justify-between items-center px-4 md:h-[72px] md:rounded-xl lg:h-full lg:w-[72px] lg:flex-col lg:py-8 lg:justify-start lg:gap-20'>
+    <nav className='bg-darkBlue h-14 w-full flex justify-between items-center px-4 md:h-[72px] md:rounded-xl lg:h-full lg:w-[92px] lg:flex-col lg:py-8 lg:gap-20'>
       <div className='h-7 aspect-square md:h-8'>
         <IconLogo />
       </div>
-      <div className='flex justify-between items-center gap-6 md:gap-10 lg:flex-col'>
+      <div className='flex justify-between items-center gap-6 md:gap-10 lg:flex-col lg:mb-auto'>
         <IconHome />
         <IconMovie />
         <IconTv />
         <IconBookmark />
       </div>
-      <div className='lg:place-self-center'>
-        <div className='h-7 aspect-square border-2 border-white rounded-full md:h-8'>
+      <div className='grid place-content-center h-7 md:h-8'>
+        <div className='h-7 md:h-8 lg:h-10 aspect-square border-2 border-white rounded-full'>
           <img src='/images/image-avatar.png' alt='' />
         </div>
       </div>

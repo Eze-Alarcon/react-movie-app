@@ -15,6 +15,9 @@ module.exports = {
       },
       fontFamily: {
         Outfit: ['Outfit', 'sans-serif']
+      },
+      gridTemplateColumns: {
+        page: '92px minmax(0, 1fr)'
       }
     }
   },

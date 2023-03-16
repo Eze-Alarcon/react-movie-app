@@ -10,10 +10,21 @@
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;500&display=swap"
       rel="stylesheet"
     />
+    <style>
+      body {
+        height: 100svh;
+      }
+
+      @media screen and (min-width: 1024px) {
+        #header_container {
+          height: 100svh;
+        }
+      }
+    </style>
     <title>Vite + React</title>
   </head>
-  <body class="bg-black font-Outfit text-white h-screen">
-    <div id="root"></div>
+  <body class="bg-black font-Outfit text-white">
+    <div id="root" class="h-full grid lg:grid-cols-page gap-6 px-6"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
