@@ -9,6 +9,7 @@ import {
   IconMovie,
   IconTv,
 } from '../../resources/svg/nav/IconsNav'
+import { NavLink } from 'react-router-dom'
 
 function Header() {
   return (
@@ -26,10 +27,42 @@ function Header() {
               <IconLogo />
             </div>
             <div className='flex justify-between items-center gap-6 md:gap-10 lg:flex-col'>
-              <IconHome />
-              <IconMovie />
-              <IconTv />
-              <IconBookmark />
+              <NavLink to='/' state='homePage'>
+                {({ isActive }) => (
+                  <IconHome
+                    className={
+                      isActive ? 'fill-white' : 'fill-blue hover:fill-red'
+                    }
+                  />
+                )}
+              </NavLink>
+              <NavLink to='/movies' state='moviesPage'>
+                {({ isActive }) => (
+                  <IconMovie
+                    className={
+                      isActive ? 'fill-white' : 'fill-blue hover:fill-red'
+                    }
+                  />
+                )}
+              </NavLink>
+              <NavLink to='/tv' state='tvPage'>
+                {({ isActive }) => (
+                  <IconTv
+                    className={
+                      isActive ? 'fill-white' : 'fill-blue hover:fill-red'
+                    }
+                  />
+                )}
+              </NavLink>
+              <NavLink to='/bookmark' state='bookmarkPage'>
+                {({ isActive }) => (
+                  <IconBookmark
+                    className={
+                      isActive ? 'fill-white' : 'fill-blue hover:fill-red'
+                    }
+                  />
+                )}
+              </NavLink>
             </div>
             <div className='grid place-content-center h-7 md:h-8'>
               <div className='h-7 md:h-8 lg:h-10 aspect-square border-2 border-white rounded-full'>

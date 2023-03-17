@@ -3,22 +3,26 @@
 /* eslint space-before-function-paren: 0 */
 
 import React, { useState } from 'react'
+// Components
+import { MovieInfo } from './MovieInfo'
 // SVG
 import { Mark } from '../../resources/svg/movies/IconsBookmarks'
-// import { CategoryMovie } from '../../resources/svg/movies/IconsCategories'
 // json
 import { images as config } from '../../storage/config.json'
-import { MovieInfo } from './MovieInfo'
 
 function MovieCard({ movie }) {
   const [marked, setMarked] = useState(false)
   const { base_url, backdrop_sizes } = config
 
+  const mappedDate = movie.release_date ?? movie.first_air_date
+  const mappedTitle = movie.title ?? movie.name
+  const mappedImg = movie.backdrop_path ?? movie.poster_path
+
   const mappedMovie = {
-    imgPath: `${base_url}${backdrop_sizes.at(-1)}${movie.backdrop_path}`,
+    imgPath: `${base_url}${backdrop_sizes.at(-1)}${mappedImg}`,
     votes: movie.vote_average.toFixed(1),
-    date: movie.release_date.substring(0, 4),
-    title: movie.title,
+    date: mappedDate.substring(0, 4),
+    title: mappedTitle,
     movie: true,
   }
 
@@ -33,7 +37,7 @@ function MovieCard({ movie }) {
           <img
             src={mappedMovie.imgPath}
             alt=''
-            className='object-cover rounded-lg'
+            className='w-full aspect-video object-cover rounded-lg'
           />
           <div
             onClick={handleClick}

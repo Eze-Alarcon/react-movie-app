@@ -3,22 +3,24 @@
 /* eslint space-before-function-paren: 0 */
 
 import React from 'react'
+import { MovieInfo } from './MovieInfo'
 // SVG
 import { Mark } from '../../resources/svg/movies/IconsBookmarks'
 // json
-// import { results as movie } from '../../mocks/trendingMovie.json'
 import { images as config } from '../../storage/config.json'
-import { MovieInfo } from './MovieInfo'
 
 function MoviePoster({ movie }) {
   const { base_url, poster_sizes } = config
 
+  const mappedDate = movie.release_date ?? movie.first_air_date
+  const mappedTitle = movie.title ?? movie.name
+
   const mappedMovie = {
     imgPath: `${base_url}${poster_sizes.at(-1)}${movie.backdrop_path}`,
     votes: movie.vote_average.toFixed(1),
-    date: movie.release_date.substring(0, 4),
-    title: movie.title,
-    movie: true,
+    date: mappedDate.substring(0, 4),
+    title: mappedTitle,
+    movie: movie.media_type === 'movie',
   }
 
   return (

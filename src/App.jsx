@@ -5,47 +5,21 @@
 import React from 'react'
 // components
 import { Header } from './components/shared/Header'
-import { SearchBar } from './components/shared/SearchBar'
-import { MoviePoster } from './components/movies/MoviePoster'
-import { MovieCard } from './components/movies/MovieCard'
-// json
-import { results as trendingMovies } from './mocks/trending.json'
-import { results as popularMovies } from './mocks/popular.json'
+import { HomePage } from './pages/HomePage'
+import { SeriesPage } from './pages/SeriesPage'
+import { MoviesPage } from './pages/MoviesPage'
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
     <>
       <Header />
-
-      <main className='customWidth grid gap-6 lg:px-0 pb-6'>
-        <div className='flex gap-6 items-center'>
-          <SearchBar />
-        </div>
-        <section className='w-full grid gap-6'>
-          <article className='space-y-6'>
-            <div className='w-full'>
-              <h1 className='text-xl font-light tracking-wide'>Trending</h1>
-            </div>
-            <div className='customWidth h-[140px] md:h-[230px] overflow-x-scroll flex flex-shrink-0 gap-4 overflow-y-hidden scrollbar-hide'>
-              {trendingMovies.map((movie) => (
-                <MoviePoster key={movie.id} movie={movie} />
-              ))}
-            </div>
-          </article>
-          <article className='space-y-6'>
-            <div className='w-full'>
-              <h1 className='text-xl font-light tracking-wide'>
-                Recommended for you
-              </h1>
-            </div>
-            <div className='grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-              {popularMovies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
-              ))}
-            </div>
-          </article>
-        </section>
-      </main>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/movies' element={<MoviesPage />} />
+        <Route path='/tv' element={<SeriesPage />} />
+        <Route path='/bookmark' element={<h1>TODO: bookmark</h1>} />
+      </Routes>
     </>
   )
 }

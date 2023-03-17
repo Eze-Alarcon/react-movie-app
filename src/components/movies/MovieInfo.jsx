@@ -1,6 +1,10 @@
 /* eslint space-before-function-paren: 0 */
+/* eslint-disable comma-dangle */
 import React from 'react'
-import { CategoryMovie } from '../../resources/svg/movies/IconsCategories'
+import {
+  CategoryMovie,
+  CategoryTv,
+} from '../../resources/svg/movies/IconsCategories'
 
 function MovieInfo({ info }) {
   return (
@@ -9,8 +13,8 @@ function MovieInfo({ info }) {
         <p>{info.date}</p>
         <span className='w-1 h-1 rounded-full bg-gray-400' aria-hidden='true' />
         <div className='flex items-center gap-2'>
-          {info.movie ? <CategoryMovie /> : <></>}
-          <p>Movie</p>
+          {info.movie ? <CategoryMovie /> : <CategoryTv />}
+          <p>{info.movie ? 'Movie' : ' TV Serie'}</p>
         </div>
         <span className='w-1 h-1 rounded-full bg-gray-400' aria-hidden='true' />
         <p>{info.votes}</p>
