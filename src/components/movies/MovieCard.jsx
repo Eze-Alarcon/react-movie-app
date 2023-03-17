@@ -8,7 +8,6 @@ import { Mark } from '../../resources/svg/movies/IconsBookmarks'
 import { CategoryMovie } from '../../resources/svg/movies/IconsCategories'
 // json
 import { images as config } from '../../storage/config.json'
-// import { results as movie } from '../../mocks/popularMovie.json'
 
 function MovieCard({ movie }) {
   const [marked, setMarked] = useState(false)

@@ -6,22 +6,22 @@ import React from 'react'
 // components
 import { Header } from './components/shared/Header'
 import { SearchBar } from './components/shared/SearchBar'
+import { MoviePoster } from './components/movies/MoviePoster'
 import { MovieCard } from './components/movies/MovieCard'
-// import { MoviePoster } from './components/movies/MoviePoster'
 // json
+import { results as trendingMovies } from './mocks/trending.json'
 import { results as popularMovies } from './mocks/popular.json'
-// import { results as trendingMovies } from './mocks/trending.json'
 
 function App() {
   return (
     <>
       <header
         id='header_container'
-        className='w-full flex justify-center pt-6 lg:flex-col lg:px-0  relative'
+        className='w-full flex justify-center lg:flex-col lg:px-0  relative'
       >
         <Header />
       </header>
-      <main className='w-full mt-6 grid gap-6 lg:px-0 pb-6'>
+      <main className='customWidth grid gap-6 lg:px-0 pb-6'>
         <div className='flex gap-6 items-center'>
           <SearchBar />
         </div>
@@ -30,11 +30,11 @@ function App() {
             <div className='w-full'>
               <h1 className='text-xl font-light tracking-wide'>Trending</h1>
             </div>
-            {/* <div className='h-[140px] md:h-[230px]'>
+            <div className='customWidth h-[140px] md:h-[230px] overflow-x-scroll flex flex-shrink-0 gap-4 overflow-y-hidden scrollbar-hide'>
               {trendingMovies.map((movie) => (
                 <MoviePoster key={movie.id} movie={movie} />
               ))}
-            </div> */}
+            </div>
           </article>
           <article className='space-y-6'>
             <div className='w-full'>

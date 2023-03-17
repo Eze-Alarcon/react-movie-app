@@ -22,11 +22,11 @@ function MoviePoster({ movie }) {
 
   return (
     <>
-      <div className='h-full md:h-60 aspect-video relative'>
+      <div className='h-full aspect-video relative rounded-lg'>
         <img
           src={mappedMovie.imgPath}
           alt=''
-          className='object-cover rounded-lg'
+          className='object-fill rounded-lg'
         />
         <div className='grid place-content-center absolute h-8 aspect-square bg-black bg-opacity-60 rounded-full top-2 right-2'>
           <Mark marked={false} />
