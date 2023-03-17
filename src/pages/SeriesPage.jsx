@@ -11,7 +11,7 @@ function SeriesPage() {
         <SearchBar />
       </div>
       <section className='w-full grid gap-6'>
-        <Grid gridItems={popularMovies} />
+        <Grid gridItems={popularMovies} title='TV Series' />
       </section>
     </main>
   )

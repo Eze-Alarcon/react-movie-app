@@ -9,7 +9,7 @@ import {
   IconMovie,
   IconTv,
 } from '../../resources/svg/nav/IconsNav'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 function Header() {
   return (
@@ -24,7 +24,9 @@ function Header() {
         >
           <nav className='bg-darkBlue h-14 w-full flex justify-between items-center px-4 md:h-[72px] rounded-xl lg:h-full lg:w-[92px] lg:flex-col lg:py-8 lg:gap-20'>
             <div className='h-7 aspect-square md:h-8'>
-              <IconLogo />
+              <Link to='/'>
+                <IconLogo />
+              </Link>
             </div>
             <div className='flex justify-between items-center gap-6 md:gap-10 lg:flex-col'>
               <NavLink to='/' state='homePage'>

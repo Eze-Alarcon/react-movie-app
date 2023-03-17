@@ -17,7 +17,7 @@ function HomePage() {
       </div>
       <section className='w-full grid gap-6'>
         <Carrousel carrouselItems={trending} />
-        <Grid gridItems={popularMovies} />
+        <Grid gridItems={popularMovies} title='Recommended for you' />
       </section>
     </main>
   )

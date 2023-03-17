@@ -2,7 +2,7 @@
 /* eslint-disable comma-dangle */
 /* eslint space-before-function-paren: 0 */
 
-import React from 'react'
+import React, { useState } from 'react'
 import { MovieInfo } from './MovieInfo'
 // SVG
 import { Mark } from '../../resources/svg/movies/IconsBookmarks'
@@ -10,6 +10,11 @@ import { Mark } from '../../resources/svg/movies/IconsBookmarks'
 import { images as config } from '../../storage/config.json'
 
 function MoviePoster({ movie }) {
+  const [marked, setMarked] = useState(false)
+
+  function handleClick() {
+    setMarked((prevState) => !prevState)
+  }
   const { base_url, poster_sizes } = config
 
   const mappedDate = movie.release_date ?? movie.first_air_date
@@ -25,14 +30,18 @@ function MoviePoster({ movie }) {
 
   return (
     <>
-      <div className='h-full aspect-video relative rounded-lg'>
+      <div className='h-full aspect-video relative rounded-lg hover:cursor-pointer selection:bg-transparent'>
         <img
           src={mappedMovie.imgPath}
           alt=''
+          loading='lazy'
           className='object-fill rounded-lg'
         />
-        <div className='grid place-content-center absolute h-8 aspect-square bg-black bg-opacity-60 rounded-full top-2 right-2'>
-          <Mark marked={false} />
+        <div
+          onClick={handleClick}
+          className='grid place-content-center absolute h-8 aspect-square bg-black bg-opacity-60 rounded-full top-2 right-2 hover:bg-white group/container'
+        >
+          <Mark marked={marked} />
         </div>
         <div className='grid gap-1 absolute bottom-0 bg-black bg-opacity-70 w-full px-4 py-2'>
           <MovieInfo info={mappedMovie} />

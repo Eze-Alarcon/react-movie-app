@@ -8,7 +8,11 @@ function Mark({ marked }) {
       height='14'
       viewBox='0 0 12 14'
       xmlns='http://www.w3.org/2000/svg'
-      className={`${marked ? 'fill-white' : 'fill-none'} stroke-white`}
+      className={`${
+        marked
+          ? 'fill-white group-hover/container:stroke-black group-hover/container:fill-black'
+          : 'fill-none group-hover/container:stroke-black'
+      } stroke-white`}
     >
       <path
         d='m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z'

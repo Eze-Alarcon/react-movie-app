@@ -37,11 +37,12 @@ function MovieCard({ movie }) {
           <img
             src={mappedMovie.imgPath}
             alt=''
+            loading='lazy'
             className='w-full aspect-video object-cover rounded-lg'
           />
           <div
             onClick={handleClick}
-            className='grid place-content-center absolute h-8 aspect-square bg-black bg-opacity-60 rounded-full top-2 right-2'
+            className='grid place-content-center absolute h-8 aspect-square bg-black bg-opacity-60 rounded-full top-2 right-2 hover:bg-white group/container'
           >
             <Mark marked={marked} />
           </div>
