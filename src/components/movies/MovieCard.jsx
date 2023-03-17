@@ -5,9 +5,10 @@
 import React, { useState } from 'react'
 // SVG
 import { Mark } from '../../resources/svg/movies/IconsBookmarks'
-import { CategoryMovie } from '../../resources/svg/movies/IconsCategories'
+// import { CategoryMovie } from '../../resources/svg/movies/IconsCategories'
 // json
 import { images as config } from '../../storage/config.json'
+import { MovieInfo } from './MovieInfo'
 
 function MovieCard({ movie }) {
   const [marked, setMarked] = useState(false)
@@ -18,6 +19,7 @@ function MovieCard({ movie }) {
     votes: movie.vote_average.toFixed(1),
     date: movie.release_date.substring(0, 4),
     title: movie.title,
+    movie: true,
   }
 
   function handleClick() {
@@ -41,23 +43,7 @@ function MovieCard({ movie }) {
           </div>
         </div>
         <div className='grid gap-1'>
-          <div className='flex items-center gap-3 font-light opacity-75 text-sm'>
-            <p>{mappedMovie.date}</p>
-            <span
-              className='w-1 h-1 rounded-full bg-gray-400'
-              aria-hidden='true'
-            />
-            <div className='flex items-center gap-2'>
-              <CategoryMovie />
-              <p>Movie</p>
-            </div>
-            <span
-              className='w-1 h-1 rounded-full bg-gray-400'
-              aria-hidden='true'
-            />
-            <p>{mappedMovie.votes}</p>
-          </div>
-          <p className='truncate tracking-wide'>{mappedMovie.title}</p>
+          <MovieInfo info={mappedMovie} />
         </div>
       </article>
     </>

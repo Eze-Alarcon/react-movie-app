@@ -15,12 +15,8 @@ import { results as popularMovies } from './mocks/popular.json'
 function App() {
   return (
     <>
-      <header
-        id='header_container'
-        className='w-full flex justify-center lg:flex-col lg:px-0  relative'
-      >
-        <Header />
-      </header>
+      <Header />
+
       <main className='customWidth grid gap-6 lg:px-0 pb-6'>
         <div className='flex gap-6 items-center'>
           <SearchBar />
