@@ -12,19 +12,14 @@ function Carrousel({ carrouselItems }) {
         <h1 className='text-xl font-light tracking-wide'>Trending</h1>
       </div>
       <div className='customWidth h-[140px] md:h-[230px] overflow-x-scroll flex flex-shrink-0 gap-4 overflow-y-hidden scrollbar-hide'>
-        {carrouselItems.map((movie) => {
-          if (movie.backdrop_path === null && movie.poster_path === null) {
-            return null
-          }
-          return (
-            <MoviePoster
-              key={`${movie.id}-carrousel`}
-              movie={movie}
-              deleteItem={deleteItem}
-              saveItem={saveItem}
-            />
-          )
-        })}
+        {carrouselItems.map((movie) => (
+          <MoviePoster
+            key={`${movie.id}-carrousel`}
+            movie={movie}
+            deleteItem={deleteItem}
+            saveItem={saveItem}
+          />
+        ))}
       </div>
     </article>
   )

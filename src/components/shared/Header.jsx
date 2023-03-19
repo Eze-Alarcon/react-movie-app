@@ -15,7 +15,7 @@ function Header() {
   return (
     <header
       id='header_container'
-      className='w-full flex justify-center lg:flex-col lg:px-0  relative'
+      className='w-full h-14 md:h-[72px] flex justify-center lg:flex-col lg:px-0  relative'
     >
       <div className='h-14 md:h-[72px] w-full relative z-50 lg:h-full'>
         <div

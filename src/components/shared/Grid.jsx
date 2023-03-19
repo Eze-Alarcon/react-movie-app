@@ -12,16 +12,14 @@ function Grid({ gridItems, title }) {
         <h1 className='text-xl font-light tracking-wide'>{title}</h1>
       </div>
       <div className='grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {gridItems.map((movie) => {
-          return (
-            <MovieCard
-              key={`${movie.id}-card`}
-              movie={movie}
-              deleteItem={deleteItem}
-              saveItem={saveItem}
-            />
-          )
-        })}
+        {gridItems.map((movie) => (
+          <MovieCard
+            key={`${movie.id}-card`}
+            movie={movie}
+            deleteItem={deleteItem}
+            saveItem={saveItem}
+          />
+        ))}
       </div>
     </article>
   )

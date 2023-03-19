@@ -33,7 +33,7 @@ function MovieCard({ movie, deleteItem, saveItem }) {
           />
           <div
             onClick={handleClick}
-            className='grid place-content-center absolute h-8 aspect-square bg-black bg-opacity-60 rounded-full top-2 right-2 hover:bg-white group/container'
+            className='grid place-content-center absolute h-8 aspect-square bg-black bg-opacity-60 rounded-full top-2 right-2 active:bg-white xl:hover:bg-white group/container'
           >
             <Mark marked={marked} />
           </div>
