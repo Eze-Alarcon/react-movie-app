@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-/* eslint-disable comma-dangle */
 /* eslint space-before-function-paren: 0 */
 
 import React from 'react'
@@ -10,7 +8,6 @@ import { SeriesPage } from './pages/SeriesPage'
 import { MoviesPage } from './pages/MoviesPage'
 import { BookmarkPages } from './pages/BookmarkPages'
 import { Routes, Route } from 'react-router-dom'
-// import { useSaveItem } from './hooks/useSaveItem'
 
 function App() {
   return (

@@ -12,7 +12,7 @@ function BookmarkPages() {
         <SearchBar />
       </div>
       <section className='w-full grid gap-6'>
-        <Grid gridItems={myBookmarks ?? []} title='My bookmarks' />
+        <Grid gridItems={myBookmarks} title='My bookmarks' />
       </section>
     </main>
   )

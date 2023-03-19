@@ -6,11 +6,10 @@ import { MovieInfo } from './MovieInfo'
 import { Mark } from '../../resources/svg/movies/IconsBookmarks'
 
 function MovieCard({ movie, deleteItem, saveItem }) {
-  // console.log(saved)
-  const [marked, setMarked] = useState(() => movie.saved)
+  const [marked, setMarked] = useState(movie.saved)
 
   function handleClick() {
-    if (!marked && !movie.saved) {
+    if (!marked) {
       saveItem(movie)
     } else {
       deleteItem(movie.id)

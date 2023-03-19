@@ -1,15 +1,24 @@
 /* eslint space-before-function-paren: 0 */
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MovieInfo } from './MovieInfo'
 import { Mark } from '../../resources/svg/movies/IconsBookmarks'
 
-function MoviePoster({ movie }) {
-  const [marked, setMarked] = useState(false)
+function MoviePoster({ movie, deleteItem, saveItem }) {
+  const [marked, setMarked] = useState(() => movie.saved)
 
   function handleClick() {
+    if (!marked && !movie.saved) {
+      saveItem(movie)
+    } else {
+      deleteItem(movie.id)
+    }
     setMarked((prevState) => !prevState)
   }
+
+  useEffect(() => {
+    if (movie.saved) setMarked(true)
+  }, [movie.saved])
 
   return (
     <>

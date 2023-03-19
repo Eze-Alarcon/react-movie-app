@@ -5,14 +5,21 @@ function useSaveItem() {
   const { myBookmarks, saveData } = useLocalStorage([])
 
   function saveItem(item) {
+    const mapItem = {
+      ...item,
+      saved: true
+    }
     const newItems = [...myBookmarks]
-    newItems.push(item)
+    newItems.push(mapItem)
     saveData(newItems)
   }
 
   function deleteItem(movieID) {
     const newItems = [...myBookmarks]
     const searchIndex = newItems.findIndex((el) => el.id === movieID)
+
+    if (searchIndex === -1) return
+
     newItems.splice(searchIndex, 1)
     saveData(newItems)
   }

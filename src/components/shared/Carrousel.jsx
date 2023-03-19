@@ -1,8 +1,11 @@
 /* eslint space-before-function-paren: 0 */
 import React from 'react'
 import { MoviePoster } from '../movies/MoviePoster'
+import { useSaveItem } from '../../hooks/useSaveItem'
 
 function Carrousel({ carrouselItems }) {
+  const { deleteItem, saveItem } = useSaveItem()
+
   return (
     <article className='space-y-6'>
       <div className='w-full'>
@@ -13,7 +16,14 @@ function Carrousel({ carrouselItems }) {
           if (movie.backdrop_path === null && movie.poster_path === null) {
             return null
           }
-          return <MoviePoster key={`${movie.id}-carrousel`} movie={movie} />
+          return (
+            <MoviePoster
+              key={`${movie.id}-carrousel`}
+              movie={movie}
+              deleteItem={deleteItem}
+              saveItem={saveItem}
+            />
+          )
         })}
       </div>
     </article>
