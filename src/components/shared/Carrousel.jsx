@@ -13,7 +13,7 @@ function Carrousel({ carrouselItems }) {
           if (movie.backdrop_path === null && movie.poster_path === null) {
             return null
           }
-          return <MoviePoster key={movie.id} movie={movie} />
+          return <MoviePoster key={`${movie.id}-carrousel`} movie={movie} />
         })}
       </div>
     </article>

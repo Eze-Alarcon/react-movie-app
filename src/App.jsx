@@ -8,9 +8,12 @@ import { Header } from './components/shared/Header'
 import { HomePage } from './pages/HomePage'
 import { SeriesPage } from './pages/SeriesPage'
 import { MoviesPage } from './pages/MoviesPage'
+import { BookmarkPages } from './pages/BookmarkPages'
 import { Routes, Route } from 'react-router-dom'
+import { useSaveItem } from './hooks/useSaveItem'
 
 function App() {
+  const { myBookmarks } = useSaveItem()
   return (
     <>
       <Header />
@@ -18,7 +21,10 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/movies' element={<MoviesPage />} />
         <Route path='/tv' element={<SeriesPage />} />
-        <Route path='/bookmark' element={<h1>TODO: bookmark</h1>} />
+        <Route
+          path='/bookmark'
+          element={<BookmarkPages myBookmarks={myBookmarks} />}
+        />
       </Routes>
     </>
   )

@@ -1,32 +1,18 @@
-/* eslint-disable camelcase */
-/* eslint-disable comma-dangle */
 /* eslint space-before-function-paren: 0 */
 
 import React, { useState } from 'react'
-// Components
 import { MovieInfo } from './MovieInfo'
-// SVG
 import { Mark } from '../../resources/svg/movies/IconsBookmarks'
-// json
-import { images as config } from '../../storage/config.json'
 
-function MovieCard({ movie }) {
-  const [marked, setMarked] = useState(false)
-  const { base_url, backdrop_sizes } = config
-
-  const mappedDate = movie.release_date ?? movie.first_air_date
-  const mappedTitle = movie.title ?? movie.name
-  const mappedImg = movie.backdrop_path ?? movie.poster_path
-
-  const mappedMovie = {
-    imgPath: `${base_url}${backdrop_sizes.at(-1)}${mappedImg}`,
-    votes: movie.vote_average.toFixed(1),
-    date: mappedDate.substring(0, 4),
-    title: mappedTitle,
-    movie: true,
-  }
+function MovieCard({ movie, saved, deleteItem, saveItem }) {
+  const [marked, setMarked] = useState(saved)
 
   function handleClick() {
+    // if (marked) {
+    //   saveItem(mappedMovie)
+    // } else {
+    //   deleteItem(movie.id)
+    // }
     setMarked((prevState) => !prevState)
   }
 
@@ -35,7 +21,7 @@ function MovieCard({ movie }) {
       <article className='grid gap-2 hover:cursor-pointer selection:bg-transparent'>
         <div className='w-full aspect-video relative'>
           <img
-            src={mappedMovie.imgPath}
+            src={movie.imgPath}
             alt=''
             loading='lazy'
             className='w-full aspect-video object-cover rounded-lg'
@@ -48,7 +34,7 @@ function MovieCard({ movie }) {
           </div>
         </div>
         <div className='grid gap-1'>
-          <MovieInfo info={mappedMovie} />
+          <MovieInfo info={movie} />
         </div>
       </article>
     </>

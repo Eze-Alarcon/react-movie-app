@@ -1,8 +1,10 @@
 /* eslint space-before-function-paren: 0 */
 import React from 'react'
 import { MovieCard } from '../movies/MovieCard'
+import { useSaveItem } from '../../hooks/useSaveItem'
 
 function Grid({ gridItems, title }) {
+  const { deleteItem, saveItem } = useSaveItem()
   return (
     <article className='space-y-6'>
       <div className='w-full'>
@@ -13,7 +15,15 @@ function Grid({ gridItems, title }) {
           if (movie.backdrop_path === null && movie.poster_path === null) {
             return null
           }
-          return <MovieCard key={movie.id} movie={movie} />
+          return (
+            <MovieCard
+              key={`${movie.id}-card`}
+              movie={movie}
+              saved={movie.saved}
+              deleteItem={deleteItem}
+              saveItem={saveItem}
+            />
+          )
         })}
       </div>
     </article>
