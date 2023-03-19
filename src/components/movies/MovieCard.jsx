@@ -1,20 +1,26 @@
+/* eslint-disable comma-dangle */
 /* eslint space-before-function-paren: 0 */
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MovieInfo } from './MovieInfo'
 import { Mark } from '../../resources/svg/movies/IconsBookmarks'
 
-function MovieCard({ movie, saved, deleteItem, saveItem }) {
-  const [marked, setMarked] = useState(saved)
+function MovieCard({ movie, deleteItem, saveItem }) {
+  // console.log(saved)
+  const [marked, setMarked] = useState(() => movie.saved)
 
   function handleClick() {
-    // if (marked) {
-    //   saveItem(mappedMovie)
-    // } else {
-    //   deleteItem(movie.id)
-    // }
+    if (!marked && !movie.saved) {
+      saveItem(movie)
+    } else {
+      deleteItem(movie.id)
+    }
     setMarked((prevState) => !prevState)
   }
+
+  useEffect(() => {
+    if (movie.saved) setMarked(true)
+  }, [movie.saved])
 
   return (
     <>

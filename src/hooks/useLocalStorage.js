@@ -20,14 +20,11 @@ function useLocalStorage(initialValue) {
   }, [])
 
   function saveItem(newItem) {
-    const localStorageItem = window.localStorage.getItem(DB_NAME)
-    const newSet = new Set([localStorageItem, newItem])
-    const stringifiedItem = JSON.stringify([...newSet])
-    window.localStorage.setItem(DB_NAME, stringifiedItem)
+    window.localStorage.setItem(DB_NAME, JSON.stringify(newItem))
     setBookmarks(newItem)
   }
 
-  return { myBookmarks: bookmarks, saveInLS: saveItem }
+  return { myBookmarks: bookmarks, saveData: saveItem }
 }
 
 export { useLocalStorage }

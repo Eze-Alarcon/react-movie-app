@@ -3,8 +3,8 @@
 /* eslint space-before-function-paren: 0 */
 
 // import { useState } from 'react'
-import { results as apiPopular } from '../mocks/popular.json'
 import { results as apiPopularMovies } from '../mocks/popularMovies.json'
+import { results as apiPopular } from '../mocks/popular.json'
 import { results as apiPopularSeries } from '../mocks/popularSeries.json'
 import { results as apiTrending } from '../mocks/trendingAll.json'
 import { images as config } from '../storage/config.json'
@@ -22,18 +22,25 @@ function useMovies() {
       const mappedTitle = item.title ?? item.name
       const mappedType = item.media_type ?? 'movie'
       const mappedVotes = item.vote_average.toFixed(1)
-      const mappedImg = item.backdrop_path ?? item.poster_path
-      const saved = isSaved(item.id)
+      const mappedSaved = isSaved(item.id)
+      let mappedImg = ''
+
+      if (item.backdrop_path === null && item.poster_path === null) {
+        mappedImg = '/images/image-not-found.jpg'
+      } else {
+        const img = item.backdrop_path ?? item.poster_path
+        // backdrop_sizes or poster_sizes must be original! this is hardcoded
+        mappedImg = `${base_url}${backdrop_sizes.at(-1)}${img}`
+      }
 
       return {
-        // backdrop_sizes or poster_sizes must be original! this is hardcoded
-        imgPath: `${base_url}${backdrop_sizes.at(-1)}${mappedImg}`,
+        imgPath: mappedImg,
         date: mappedDate.substring(0, 4),
         votes: mappedVotes,
         title: mappedTitle,
         type: mappedType,
+        saved: mappedSaved,
         id: item.id,
-        saved,
       }
     })
     return mapData
@@ -45,8 +52,8 @@ function useMovies() {
   const trending = mapData(apiTrending)
 
   return {
-    popular,
     popularMovies,
+    popular,
     popularSeries,
     trending
   }

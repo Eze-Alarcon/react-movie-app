@@ -10,10 +10,9 @@ import { SeriesPage } from './pages/SeriesPage'
 import { MoviesPage } from './pages/MoviesPage'
 import { BookmarkPages } from './pages/BookmarkPages'
 import { Routes, Route } from 'react-router-dom'
-import { useSaveItem } from './hooks/useSaveItem'
+// import { useSaveItem } from './hooks/useSaveItem'
 
 function App() {
-  const { myBookmarks } = useSaveItem()
   return (
     <>
       <Header />
@@ -21,10 +20,7 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/movies' element={<MoviesPage />} />
         <Route path='/tv' element={<SeriesPage />} />
-        <Route
-          path='/bookmark'
-          element={<BookmarkPages myBookmarks={myBookmarks} />}
-        />
+        <Route path='/bookmark' element={<BookmarkPages />} />
       </Routes>
     </>
   )

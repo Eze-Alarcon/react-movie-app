@@ -2,19 +2,19 @@
 import { useLocalStorage } from './useLocalStorage'
 
 function useSaveItem() {
-  const { myBookmarks, saveInLS } = useLocalStorage([])
+  const { myBookmarks, saveData } = useLocalStorage([])
 
   function saveItem(item) {
     const newItems = [...myBookmarks]
     newItems.push(item)
-    saveInLS(newItems)
+    saveData(newItems)
   }
 
   function deleteItem(movieID) {
-    const oldItems = [...myBookmarks]
-    const searchIndex = oldItems.findIndex((el) => el.id === movieID)
-    const newItems = oldItems.slice(searchIndex, 1)
-    saveInLS(newItems)
+    const newItems = [...myBookmarks]
+    const searchIndex = newItems.findIndex((el) => el.id === movieID)
+    newItems.splice(searchIndex, 1)
+    saveData(newItems)
   }
 
   function isSaved(movieID) {
