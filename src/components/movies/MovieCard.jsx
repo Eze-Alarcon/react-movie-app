@@ -23,13 +23,13 @@ function MovieCard({ movie, deleteItem, saveItem }) {
 
   return (
     <>
-      <article className='grid gap-2 hover:cursor-pointer selection:bg-transparent'>
-        <div className='w-full aspect-video relative'>
+      <article className='grid gap-2 hover:cursor-pointer selection:bg-transparent select-none'>
+        <div className='w-full aspect-video relative selection:bg-transparent select-none'>
           <img
             src={movie.imgPath}
             alt=''
             loading='lazy'
-            className='w-full aspect-video object-cover rounded-lg'
+            className='w-full aspect-video object-cover rounded-lg selection:bg-transparent select-none'
           />
           <div
             onClick={handleClick}

@@ -10,8 +10,8 @@ function Mark({ marked }) {
       xmlns='http://www.w3.org/2000/svg'
       className={`${
         marked
-          ? 'fill-white group-active/container:stroke-black group-active/container:fill-black xl:group-hover/container:stroke-black xl:group-hover/container:fill-black'
-          : 'fill-none group-hover/active:stroke-black xl:group-hover/container:stroke-black'
+          ? 'fill-white group-active/container:stroke-black group-active/container:fill-black xl:group-hover/container:stroke-black xl:group-hover/container:fill-black '
+          : 'fill-none xl:group-hover/container:stroke-black group-active/container:fill-black'
       } stroke-white`}
     >
       <path
