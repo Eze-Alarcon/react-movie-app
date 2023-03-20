@@ -8,7 +8,7 @@ import { Pagination, Navigation, FreeMode } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/free-mode'
-// import 'swiper/css/pagination'
+
 function Carrousel({ carrouselItems }) {
   const { deleteItem, saveItem } = useSaveItem()
 
@@ -52,16 +52,3 @@ function Carrousel({ carrouselItems }) {
 }
 
 export { Carrousel }
-
-/*
-className='customWidth h-[140px] md:h-[230px] overflow-x-scroll flex flex-shrink-0 gap-4 overflow-y-hidden scrollbar-hide'
-
-{{carrouselItems.map((movie) => (
-          <MoviePoster
-            key={`${movie.id}-carrousel`}
-            movie={movie}
-            deleteItem={deleteItem}
-            saveItem={saveItem}
-          />
-        ))}
-*/

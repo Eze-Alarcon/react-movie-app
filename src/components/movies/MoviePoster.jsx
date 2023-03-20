@@ -8,7 +8,7 @@ function MoviePoster({ movie, deleteItem, saveItem }) {
   const [marked, setMarked] = useState(() => movie.saved)
 
   function handleClick() {
-    if (!marked && !movie.saved) {
+    if (!marked) {
       saveItem(movie)
     } else {
       deleteItem(movie.id)

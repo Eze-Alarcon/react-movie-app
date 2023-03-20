@@ -1,4 +1,3 @@
-/* eslint-disable comma-dangle */
 /* eslint space-before-function-paren: 0 */
 
 import React, { useEffect, useState } from 'react'

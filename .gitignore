@@ -27,7 +27,7 @@ dist-ssr
 API_KEY.js
 src/mocks
 src/assets
-
+TODO.md
 
 # Created by https://www.toptal.com/developers/gitignore/api/images,node,windows,linux,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=images,node,windows,linux,macos
