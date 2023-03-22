@@ -1,20 +1,26 @@
 /* eslint space-before-function-paren: 0 */
 import React from 'react'
-import { SearchBar } from '../components/shared/SearchBar'
-import { Grid } from '../components/shared/Grid'
 import { useSaveItem } from '../hooks/useSaveItem'
+import { SectionLayout } from '../layout/SectionLayout'
+import { Grid } from '../layout/Grid'
+import { MovieCard } from '../components/movies/MovieCard'
 
 function BookmarkPages() {
-  const { myBookmarks } = useSaveItem()
+  const { myBookmarks, deleteItem, saveItem } = useSaveItem()
+
   return (
-    <main className='customWidth flex flex-col gap-6 lg:px-0 pb-6 items-start'>
-      <div className='flex gap-6 items-center h-min'>
-        <SearchBar />
-      </div>
-      <section className='w-full grid gap-6'>
-        <Grid gridItems={myBookmarks} title='My bookmarks' />
-      </section>
-    </main>
+    <SectionLayout inputHolder='Search for bookmarked movie or TV shows'>
+      <Grid title='My bookmarks'>
+        {myBookmarks.map((movie) => (
+          <MovieCard
+            key={`${movie.id}-card`}
+            movie={movie}
+            deleteItem={deleteItem}
+            saveItem={saveItem}
+          />
+        ))}
+      </Grid>
+    </SectionLayout>
   )
 }
 

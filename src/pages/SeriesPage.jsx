@@ -1,20 +1,28 @@
 /* eslint space-before-function-paren: 0 */
 import React from 'react'
-import { SearchBar } from '../components/shared/SearchBar'
-import { Grid } from '../components/shared/Grid'
 import { useMovies } from '../hooks/useMovies'
+import { SectionLayout } from '../layout/SectionLayout'
+import { Grid } from '../layout/Grid'
+import { useSaveItem } from '../hooks/useSaveItem'
+import { MovieCard } from '../components/movies/MovieCard'
 
 function SeriesPage() {
   const { popularSeries } = useMovies()
+  const { deleteItem, saveItem } = useSaveItem()
+
   return (
-    <main className='customWidth grid gap-6 lg:px-0 pb-6'>
-      <div className='flex gap-6 items-center'>
-        <SearchBar />
-      </div>
-      <section className='w-full grid gap-6'>
-        <Grid gridItems={popularSeries} title='TV Series' />
-      </section>
-    </main>
+    <SectionLayout inputHolder='Search for TV series'>
+      <Grid title='TV Series'>
+        {popularSeries.map((movie) => (
+          <MovieCard
+            key={`${movie.id}-card`}
+            movie={movie}
+            deleteItem={deleteItem}
+            saveItem={saveItem}
+          />
+        ))}
+      </Grid>
+    </SectionLayout>
   )
 }
 
