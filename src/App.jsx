@@ -8,17 +8,23 @@ import { SeriesPage } from './pages/SeriesPage'
 import { MoviesPage } from './pages/MoviesPage'
 import { BookmarkPages } from './pages/BookmarkPages'
 import { Routes, Route } from 'react-router-dom'
+import { Modal } from './components/modal/Modal'
+// Context
+import { ModalProvider } from './context/ModalContext'
 
 function App() {
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/movies' element={<MoviesPage />} />
-        <Route path='/tv' element={<SeriesPage />} />
-        <Route path='/bookmark' element={<BookmarkPages />} />
-      </Routes>
+      <ModalProvider>
+        <Header />
+        <Modal />
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/movies' element={<MoviesPage />} />
+          <Route path='/tv' element={<SeriesPage />} />
+          <Route path='/bookmark' element={<BookmarkPages />} />
+        </Routes>
+      </ModalProvider>
     </>
   )
 }
