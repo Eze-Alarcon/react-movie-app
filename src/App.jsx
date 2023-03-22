@@ -1,6 +1,8 @@
 /* eslint space-before-function-paren: 0 */
 
 import React from 'react'
+// Context
+import { ModalProvider } from './context/ModalContext'
 // components
 import { Header } from './components/shared/Header'
 import { HomePage } from './pages/HomePage'
@@ -9,8 +11,6 @@ import { MoviesPage } from './pages/MoviesPage'
 import { BookmarkPages } from './pages/BookmarkPages'
 import { Routes, Route } from 'react-router-dom'
 import { Modal } from './components/modal/Modal'
-// Context
-import { ModalProvider } from './context/ModalContext'
 
 function App() {
   return (

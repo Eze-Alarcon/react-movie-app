@@ -1,19 +1,19 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable comma-dangle */
 /* eslint-disable space-before-function-paren */
-import React, { useContext, useEffect } from 'react'
-import { usePresence, AnimatePresence } from 'framer-motion'
+import React, { useContext } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import { ModalContext } from '../../context/ModalContext'
 import { createPortal } from 'react-dom'
 import { ModalContent } from './ModalContent'
 
 function Modal() {
   const { closeModal, modalStatus } = useContext(ModalContext)
-  const [isPresent, safeToRemove] = usePresence()
 
-  useEffect(() => {
-    !isPresent && setTimeout(safeToRemove, 1000)
-  }, [isPresent])
+  function close(event) {
+    event.stopPropagation()
+    closeModal()
+  }
 
   const dropIn = {
     hidden: {
@@ -38,10 +38,14 @@ function Modal() {
 
   return (
     <AnimatePresence>
-      {modalStatus ? (
+      {modalStatus.open ? (
         <>
           {createPortal(
-            <ModalContent onClose={closeModal} dropIn={dropIn} />,
+            <ModalContent
+              onClose={close}
+              dropIn={dropIn}
+              // movieData={modalStatus.information}
+            />,
             document.body
           )}
         </>
@@ -51,8 +55,3 @@ function Modal() {
 }
 
 export { Modal }
-
-// createPortal(
-//   <ModalContent onClose={() => setShowModal(false)} />,
-//   document.body
-// )

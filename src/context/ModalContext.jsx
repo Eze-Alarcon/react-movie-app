@@ -5,14 +5,17 @@ import { createContext, useState } from 'react'
 const ModalContext = createContext(false)
 
 function ModalProvider({ children }) {
-  const [modalStatus, SetModalStatus] = useState(false)
+  const [modalStatus, SetModalStatus] = useState({
+    open: false,
+    movieID: null,
+  })
 
-  function openModal() {
-    SetModalStatus(true)
+  function openModal(movieID) {
+    SetModalStatus({ open: true, movieID })
   }
 
   function closeModal() {
-    SetModalStatus(false)
+    SetModalStatus({ open: false, movieID: null })
   }
 
   const modalHandlers = {

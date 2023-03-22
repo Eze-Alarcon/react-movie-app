@@ -10,11 +10,13 @@ function SearchBar() {
       <div>
         <IconSearch />
       </div>
-      <input
-        type='text'
-        placeholder='Search for movies or TV series'
-        className='bg-black w-full form-input outline-none border-0 border-b-2 border-transparent focus:ring-0 focus:border-blue hover:cursor-pointer caret-red'
-      />
+      <form action=''>
+        <input
+          type='text'
+          placeholder='Search for movies or TV series'
+          className='bg-black w-full form-input outline-none border-0 border-b-2 border-transparent focus:ring-0 focus:border-blue hover:cursor-pointer caret-red'
+        />
+      </form>
     </>
   )
 }

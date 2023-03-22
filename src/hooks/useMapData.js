@@ -1,11 +1,13 @@
+/* eslint-disable camelcase */
 /* eslint-disable space-before-function-paren */
 /* eslint-disable comma-dangle */
 
-import { images } from '../storage/config.json'
+import config from '../storage/config.json'
 import { useSaveItem } from './useSaveItem'
 
 function mapData(rawData) {
   const { isSaved } = useSaveItem()
+  const { images } = config
   const backupImage = '/images/image-not-found.jpg'
 
   if (!Array.isArray(rawData)) throw new Error('Wrong data type entry')
