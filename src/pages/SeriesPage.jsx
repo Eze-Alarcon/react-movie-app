@@ -1,14 +1,12 @@
 /* eslint space-before-function-paren: 0 */
-import React from 'react'
-import { useMovies } from '../hooks/useMovies'
+import React, { useContext } from 'react'
 import { SectionLayout } from '../layout/SectionLayout'
 import { Grid } from '../layout/Grid'
-import { useSaveItem } from '../hooks/useSaveItem'
 import { MovieCard } from '../components/movies/MovieCard'
+import { MovieContext } from '../context/MovieContext'
 
 function SeriesPage() {
-  const { popularSeries } = useMovies()
-  const { deleteItem, saveItem } = useSaveItem()
+  const { popularSeries, deleteItem, saveItem } = useContext(MovieContext)
 
   return (
     <SectionLayout inputHolder='Search for TV series'>

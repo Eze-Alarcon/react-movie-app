@@ -1,47 +1,25 @@
 /* eslint space-before-function-paren: 0 */
 /* eslint-disable comma-dangle */
 
-import React from 'react'
-import { useMovies } from '../hooks/useMovies'
+import React, { useContext } from 'react'
+import { MovieContext } from '../context/MovieContext'
 import { HomeLayout } from '../layout/HomeLayout'
 import { Carrousel } from '../layout/Carrousel'
 import { Grid } from '../layout/Grid'
-import { useSaveItem } from '../hooks/useSaveItem'
 import { MovieCard } from '../components/movies/MovieCard'
 import { MoviePoster } from '../components/movies/MoviePoster'
-
-// Swipper slider
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination, Navigation, FreeMode } from 'swiper'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/free-mode'
+import { SwiperSlide } from 'swiper/react'
 
 function HomePage() {
-  const { trending, popular } = useMovies()
-  const { deleteItem, saveItem } = useSaveItem()
+  const { trending, popular } = useContext(MovieContext)
+  const carrouselItems = [...trending] ?? null
+
+  const { deleteItem, saveItem } = useContext(MovieContext)
 
   return (
     <HomeLayout inputHolder='Search for movies or TV series'>
-      <Carrousel>
-        <Swiper
-          modules={[Navigation, Pagination, FreeMode]}
-          loop
-          breakpoints={{
-            0: {
-              centeredSlides: true,
-              freeMode: true,
-            },
-            1024: {
-              freeMode: false,
-              centeredSlides: false,
-              navigation: true,
-            },
-          }}
-          slidesPerView='auto'
-          spaceBetween={16}
-          className='h-full flex flex-shrink-0'
-        >
+      {carrouselItems.length > 1 && (
+        <Carrousel>
           {trending.map((movie) => (
             <SwiperSlide key={`${movie.id}-carrousel`}>
               <MoviePoster
@@ -51,8 +29,8 @@ function HomePage() {
               />
             </SwiperSlide>
           ))}
-        </Swiper>
-      </Carrousel>
+        </Carrousel>
+      )}
       <Grid title='Recommended for you'>
         {popular.map((movie) => (
           <MovieCard

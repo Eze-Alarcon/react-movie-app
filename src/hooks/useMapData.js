@@ -3,10 +3,8 @@
 /* eslint-disable comma-dangle */
 
 import config from '../storage/config.json'
-import { useSaveItem } from './useSaveItem'
 
-function mapData(rawData) {
-  const { isSaved } = useSaveItem()
+function mapData(rawData, option) {
   const { images } = config
   const backupImage = '/images/image-not-found.jpg'
 
@@ -17,7 +15,7 @@ function mapData(rawData) {
     const mappedTitle = item.title ?? item.name
     const mappedType = item.media_type ?? 'movie'
     const mappedVotes = item.vote_average.toFixed(1)
-    const mappedSaved = isSaved(item.id)
+    const mappedSaved = false
     let mappedImg = ''
 
     if (item.backdrop_path === null && item.poster_path === null) {
@@ -35,6 +33,7 @@ function mapData(rawData) {
       type: mappedType,
       saved: mappedSaved,
       id: item.id,
+      section: option
     }
   })
   return mapData

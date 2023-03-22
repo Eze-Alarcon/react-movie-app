@@ -1,35 +1,39 @@
 /* eslint-disable camelcase */
 /* eslint-disable comma-dangle */
 /* eslint space-before-function-paren: 0 */
-
-// import { useState } from 'react'
-import apiPopularMovies from '../mocks/popularMovies.json'
-import apiPopular from '../mocks/popular.json'
-import apiPopularSeries from '../mocks/popularSeries.json'
-import apiTrending from '../mocks/trendingAll.json'
-// import witoutResults from '../mocks/withoutResults.json'
-import { mapData } from './useMapData'
+import { useContext } from 'react'
+import { MovieContext } from '../context/MovieContext.jsx'
 
 function useMovies() {
-  const popularResults = apiPopular.results
-  const popularMoviesResults = apiPopularMovies.results
-  const popularSeriesResults = apiPopularSeries.results
-  const trendingResults = apiTrending.results
+  const {
+    filterByCategory,
+    setPopular,
+    setSeries,
+    setPopularMovies,
+    setTrending
+  } = useContext(MovieContext)
 
-  function mappedData(rawData) {
-    return mapData(rawData)
+  function loadHomeItems() {
+    const newTrending = filterByCategory('trending')
+    const newPopular = filterByCategory('popular')
+    setTrending(newTrending)
+    setPopular(newPopular)
   }
 
-  const popular = mappedData(popularResults)
-  const popularMovies = mappedData(popularMoviesResults)
-  const popularSeries = mappedData(popularSeriesResults)
-  const trending = mappedData(trendingResults)
+  function loadMovieSection() {
+    const newPopularMovies = filterByCategory('movies')
+    setPopularMovies(newPopularMovies)
+  }
+
+  function loadSeries() {
+    const newSeries = filterByCategory('series')
+    setSeries(newSeries)
+  }
 
   return {
-    popularMovies,
-    popular,
-    popularSeries,
-    trending
+    loadHomeItems,
+    loadMovieSection,
+    loadSeries,
   }
 }
 

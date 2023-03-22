@@ -3,6 +3,7 @@
 import React from 'react'
 // Context
 import { ModalProvider } from './context/ModalContext'
+import { MovieProvider } from './context/MovieContext'
 // components
 import { Header } from './components/shared/Header'
 import { HomePage } from './pages/HomePage'
@@ -15,16 +16,18 @@ import { Modal } from './components/modal/Modal'
 function App() {
   return (
     <>
-      <ModalProvider>
-        <Header />
-        <Modal />
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/movies' element={<MoviesPage />} />
-          <Route path='/tv' element={<SeriesPage />} />
-          <Route path='/bookmark' element={<BookmarkPages />} />
-        </Routes>
-      </ModalProvider>
+      <MovieProvider>
+        <ModalProvider>
+          <Header />
+          <Modal />
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/movies' element={<MoviesPage />} />
+            <Route path='/tv' element={<SeriesPage />} />
+            <Route path='/bookmark' element={<BookmarkPages />} />
+          </Routes>
+        </ModalProvider>
+      </MovieProvider>
     </>
   )
 }

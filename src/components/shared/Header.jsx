@@ -1,7 +1,7 @@
 /* eslint-disable comma-dangle */
 /* eslint space-before-function-paren: 0 */
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { IconLogo } from '../../resources/svg/IconLogo'
 import {
   IconBookmark,
@@ -10,8 +10,14 @@ import {
   IconTv,
 } from '../../resources/svg/nav/IconsNav'
 import { Link, NavLink } from 'react-router-dom'
+import { MovieContext } from '../../context/MovieContext'
 
 function Header() {
+  const { setUrl } = useContext(MovieContext)
+
+  function handleClick(route) {
+    setUrl(route)
+  }
   return (
     <header
       id='header_container'
@@ -24,12 +30,16 @@ function Header() {
         >
           <nav className='bg-darkBlue h-14 w-full flex justify-between items-center px-4 md:h-[72px] rounded-xl lg:h-full lg:w-[92px] lg:flex-col lg:py-8 lg:gap-20'>
             <div className='h-7 aspect-square md:h-8'>
-              <Link to='/'>
+              <Link to='/' onClick={() => handleClick('home')}>
                 <IconLogo />
               </Link>
             </div>
             <div className='flex justify-between items-center gap-6 md:gap-10 lg:flex-col'>
-              <NavLink to='/' state='homePage'>
+              <NavLink
+                to='/'
+                state='homePage'
+                onClick={() => handleClick('home')}
+              >
                 {({ isActive }) => (
                   <IconHome
                     className={
@@ -38,7 +48,11 @@ function Header() {
                   />
                 )}
               </NavLink>
-              <NavLink to='/movies' state='moviesPage'>
+              <NavLink
+                to='/movies'
+                state='moviesPage'
+                onClick={() => handleClick('movies')}
+              >
                 {({ isActive }) => (
                   <IconMovie
                     className={
@@ -47,7 +61,11 @@ function Header() {
                   />
                 )}
               </NavLink>
-              <NavLink to='/tv' state='tvPage'>
+              <NavLink
+                to='/tv'
+                state='tvPage'
+                onClick={() => handleClick('series')}
+              >
                 {({ isActive }) => (
                   <IconTv
                     className={
@@ -56,7 +74,11 @@ function Header() {
                   />
                 )}
               </NavLink>
-              <NavLink to='/bookmark' state='bookmarkPage'>
+              <NavLink
+                to='/bookmark'
+                state='bookmarkPage'
+                onClick={() => handleClick('bookmark')}
+              >
                 {({ isActive }) => (
                   <IconBookmark
                     className={

@@ -1,17 +1,17 @@
 /* eslint space-before-function-paren: 0 */
-import React from 'react'
-import { useSaveItem } from '../hooks/useSaveItem'
+import React, { useContext } from 'react'
+import { MovieContext } from '../context/MovieContext'
 import { SectionLayout } from '../layout/SectionLayout'
 import { Grid } from '../layout/Grid'
 import { MovieCard } from '../components/movies/MovieCard'
 
 function BookmarkPages() {
-  const { myBookmarks, deleteItem, saveItem } = useSaveItem()
+  const { bookmarks, deleteItem, saveItem } = useContext(MovieContext)
 
   return (
     <SectionLayout inputHolder='Search for bookmarked movie or TV shows'>
       <Grid title='My bookmarks'>
-        {myBookmarks.map((movie) => (
+        {bookmarks.map((movie) => (
           <MovieCard
             key={`${movie.id}-card`}
             movie={movie}
