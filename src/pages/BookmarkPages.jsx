@@ -6,7 +6,7 @@ import { Grid } from '../layout/Grid'
 import { MovieCard } from '../components/movies/MovieCard'
 
 function BookmarkPages() {
-  const { myBookmarks, deleteItem, saveItem } = useContext(MovieContext)
+  const { myBookmarks, deleteItem, bookmarkItem } = useContext(MovieContext)
 
   const hasBookmarks = myBookmarks?.length > 0 ?? false
 
@@ -19,7 +19,7 @@ function BookmarkPages() {
               key={`${movie.id}-card`}
               movie={movie}
               deleteItem={deleteItem}
-              saveItem={saveItem}
+              saveItem={bookmarkItem}
             />
           ))}
       </Grid>

@@ -22,7 +22,7 @@ function mapData(rawData) {
       mappedImg = backupImage
     } else {
       const img = item.backdrop_path ?? item.poster_path
-      mappedImg = `${images.base_url}${images.backdrop_sizes.at(-1)}${img}`
+      mappedImg = `${images.secure_base_url}${images.backdrop_sizes.at(-1)}${img}`
     }
 
     return {

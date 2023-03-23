@@ -3,16 +3,25 @@
 import { useState } from 'react'
 
 function useSearch() {
-  const [searchedValue, setSearchedValue] = useState()
+  const [searchedValue, setSearchedValue] = useState('')
 
   function handleSearch(event) {
     event.preventDefault()
-    const query = Object.fromEntries(new FormData(event.target))
-    if (query.search === '') return
-    setSearchedValue(query.search)
+    const { search } = Object.fromEntries(new FormData(event.target))
+    if (search === '') return
+    setSearchedValue(search.toLowerCase())
   }
 
-  return { handleSearch, searchedValue, setSearchedValue }
+  function filterArray(arr) {
+    if (searchedValue.length < 3) return arr
+
+    const filter = arr.filter((item) =>
+      item.title.toLowerCase().includes(searchedValue)
+    )
+    return filter
+  }
+
+  return { handleSearch, searchedValue, setSearchedValue, filterArray }
 }
 
 export { useSearch }

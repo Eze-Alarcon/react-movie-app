@@ -13,13 +13,33 @@ const MovieContext = createContext()
 
 function MovieProvider({ children }) {
   const { myBookmarks, bookmarkItem, deleteItem } = useLocalStorage([])
-  // states
-  // const [allData, setAllData] = useState([])
+
   const [popular, setPopular] = useState([])
   const [series, setSeries] = useState([])
   const [popularMovies, setPopularMovies] = useState([])
   const [trending, setTrending] = useState([])
+  const [showBM, setShowBM] = useState([])
   const [url, setUrl] = useState(null)
+
+  const [searchedValue, setSearchedValue] = useState('')
+
+  function handleSearch(event) {
+    event.preventDefault()
+    const { search } = Object.fromEntries(new FormData(event.target))
+    setSearchedValue(search.toLowerCase())
+  }
+
+  useEffect(() => {
+    const arr = [...myBookmarks]
+    setShowBM(arr)
+    if (searchedValue.length <= 3) return
+
+    const filter = arr.filter((item) =>
+      item.title.toLowerCase().includes(searchedValue)
+    )
+
+    setShowBM(filter)
+  }, [searchedValue])
 
   function detectLocation() {
     const actualURL = window.location.href
@@ -61,7 +81,7 @@ function MovieProvider({ children }) {
   }
 
   useEffect(() => {
-    if (url === null || url === 'bookmark') return
+    if (url === null) return
 
     if (url === 'home') {
       loadHomeItems()
@@ -74,6 +94,10 @@ function MovieProvider({ children }) {
     if (url === 'series') {
       loadSeries()
     }
+    if (url === 'bookmark') {
+      const arr = [...myBookmarks]
+      setShowBM(arr)
+    }
   }, [url])
 
   useEffect(() => {
@@ -85,7 +109,9 @@ function MovieProvider({ children }) {
     popular,
     popularSeries: series,
     trending,
-    myBookmarks,
+    myBookmarks: showBM,
+    url,
+    searchedValue,
   }
 
   const functions = {
@@ -93,6 +119,8 @@ function MovieProvider({ children }) {
     bookmarkItem,
     deleteItem,
     isBookmarked,
+    handleSearch,
+    // filterArray,
   }
 
   return (
