@@ -11,7 +11,10 @@ function BookmarkPages() {
   const hasBookmarks = myBookmarks?.length > 0 ?? false
 
   return (
-    <SectionLayout inputHolder='Search for bookmarked movie or TV shows'>
+    <SectionLayout
+      inputHolder='Search for bookmarked movie or TV shows'
+      name='bookmark'
+    >
       <Grid title='My bookmarks'>
         {hasBookmarks &&
           myBookmarks.map((movie) => (

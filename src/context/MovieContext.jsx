@@ -25,8 +25,8 @@ function MovieProvider({ children }) {
 
   function handleSearch(event) {
     event.preventDefault()
-    const { search } = Object.fromEntries(new FormData(event.target))
-    setSearchedValue(search.toLowerCase())
+    const val = event.target.value.toLowerCase().trimStart()
+    setSearchedValue(val)
   }
 
   useEffect(() => {
@@ -120,7 +120,6 @@ function MovieProvider({ children }) {
     deleteItem,
     isBookmarked,
     handleSearch,
-    // filterArray,
   }
 
   return (
