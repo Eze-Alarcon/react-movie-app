@@ -1,24 +1,21 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable space-before-function-paren */
 import { createContext, useEffect, useState } from 'react'
-import apiMovies from '../mocks/popularMovies.json'
-import apiPopular from '../mocks/popular.json'
-import apiSeries from '../mocks/popularSeries.json'
-import apiTrending from '../mocks/trendingAll.json'
-// import witoutResults from '../mocks/withoutResults.json'
-import { mapData } from '../hooks/useMapData'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { getItems, API_ENDPOINTS } from '../services/fetchData'
 
 const MovieContext = createContext()
 
 function MovieProvider({ children }) {
   const { myBookmarks, bookmarkItem, deleteItem } = useLocalStorage([])
 
+  const [loading, setLoading] = useState(true)
+  const [trending, setTrending] = useState([])
   const [popular, setPopular] = useState([])
   const [series, setSeries] = useState([])
-  const [popularMovies, setPopularMovies] = useState([])
-  const [trending, setTrending] = useState([])
+  const [movies, setMovies] = useState([])
   const [showBM, setShowBM] = useState([])
+  const [error, setError] = useState(null)
   const [url, setUrl] = useState(null)
 
   const [searchedValue, setSearchedValue] = useState('')
@@ -63,25 +60,48 @@ function MovieProvider({ children }) {
     return checkSaved
   }
 
-  function loadHomeItems() {
-    const mapTrending = mapData(apiTrending.results)
-    const mapPopular = mapData(apiPopular.results)
-    setTrending(mapTrending)
-    setPopular(mapPopular)
+  async function loadHomeItems() {
+    const trendingDay = await getItems({ url: API_ENDPOINTS.TRENDING_DAY })
+    const trendingWeek = await getItems({ url: API_ENDPOINTS.TRENDING_WEEK })
+    if (trendingDay.length > 0 && trendingWeek.length > 0) {
+      setTrending(trendingDay)
+      setPopular(trendingWeek)
+      setError(false)
+    } else {
+      setTrending([])
+      setPopular([])
+      setError(true)
+    }
+    setLoading(false)
   }
 
-  function loadMovieSection() {
-    const mapMovies = mapData(apiMovies.results)
-    setPopularMovies(mapMovies)
+  async function loadMovieSection() {
+    const movies = await getItems({ url: API_ENDPOINTS.MOVIES })
+    if (movies.length > 0) {
+      setMovies(movies)
+      setError(false)
+    } else {
+      setMovies([])
+      setError(true)
+    }
+    setLoading(false)
   }
 
-  function loadSeries() {
-    const mapSeries = mapData(apiSeries.results)
-    setSeries(mapSeries)
+  async function loadSeries() {
+    const series = await getItems({ url: API_ENDPOINTS.SERIES })
+    if (series.lenght > 0) {
+      setSeries(series)
+      setError(false)
+    } else {
+      setSeries([])
+      setError(true)
+    }
+    setLoading(false)
   }
 
   useEffect(() => {
     if (url === null) return
+    setLoading(true)
 
     if (url === 'home') {
       loadHomeItems()
@@ -105,13 +125,15 @@ function MovieProvider({ children }) {
   }, [])
 
   const states = {
-    popularMovies,
+    popularMovies: movies,
     popular,
     popularSeries: series,
     trending,
     myBookmarks: showBM,
     url,
     searchedValue,
+    loading,
+    error,
   }
 
   const functions = {
