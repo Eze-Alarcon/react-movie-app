@@ -12,7 +12,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage'
 const MovieContext = createContext()
 
 function MovieProvider({ children }) {
-  const { myBookmarks, saveInLocalStorage } = useLocalStorage([])
+  const { myBookmarks, bookmarkItem, deleteItem } = useLocalStorage([])
   // states
   // const [allData, setAllData] = useState([])
   const [popular, setPopular] = useState([])
@@ -35,14 +35,6 @@ function MovieProvider({ children }) {
     if (!Array.isArray(arr)) return
     const checkSaved = arr.map((item) => {
       const bookmarked = myBookmarks.some((el) => el.id === item.id)
-
-      if (bookmarked) {
-        console.log({
-          name: item.title,
-          id: item.id,
-          bookmarked,
-        })
-      }
       return {
         ...item,
         saved: bookmarked,
@@ -54,53 +46,18 @@ function MovieProvider({ children }) {
   function loadHomeItems() {
     const mapTrending = mapData(apiTrending.results)
     const mapPopular = mapData(apiPopular.results)
-    const newTrending = isBookmarked(mapTrending)
-    const newPopular = isBookmarked(mapPopular)
-    setTrending(newTrending)
-    setPopular(newPopular)
+    setTrending(mapTrending)
+    setPopular(mapPopular)
   }
 
   function loadMovieSection() {
     const mapMovies = mapData(apiMovies.results)
-    const newMovies = isBookmarked(mapMovies)
-    setPopularMovies(newMovies)
+    setPopularMovies(mapMovies)
   }
 
   function loadSeries() {
     const mapSeries = mapData(apiSeries.results)
-    const newSeries = isBookmarked(mapSeries)
-    setSeries(newSeries)
-  }
-
-  function bookmarkItem(item) {
-    const mapItem = {
-      ...item,
-      saved: true,
-    }
-    const alreadySaved = myBookmarks.some((item) => item.id === mapItem.id)
-    if (alreadySaved) return
-    const newItems = [...myBookmarks]
-    newItems.push(mapItem)
-    saveInLocalStorage(newItems)
-    // const newData = [...allData]
-    // const index = newData.findIndex((item) => item.id === mapItem.id)
-    // newData[index].saved = true
-    // setAllData(newData)
-  }
-
-  function deleteItem(movieID) {
-    const newItems = [...myBookmarks]
-    const searchIndex = newItems.findIndex((el) => el.id === movieID)
-
-    if (searchIndex === -1) return
-
-    newItems.splice(searchIndex, 1)
-    saveInLocalStorage(newItems)
-
-    // const newData = [...allData]
-    // const index = newData.findIndex((item) => item.id === movieID)
-    // newData[index].saved = false
-    // setAllData(newData)
+    setSeries(mapSeries)
   }
 
   useEffect(() => {
@@ -135,6 +92,7 @@ function MovieProvider({ children }) {
     setUrl,
     bookmarkItem,
     deleteItem,
+    isBookmarked,
   }
 
   return (

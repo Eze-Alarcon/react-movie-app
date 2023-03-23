@@ -8,7 +8,6 @@ import { MovieCard } from '../components/movies/MovieCard'
 function BookmarkPages() {
   const { myBookmarks, deleteItem, saveItem } = useContext(MovieContext)
 
-  console.log('Home page - bookmarks.length', myBookmarks?.length > 0)
   const hasBookmarks = myBookmarks?.length > 0 ?? false
 
   return (

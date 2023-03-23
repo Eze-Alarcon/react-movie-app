@@ -6,16 +6,18 @@ import { MovieCard } from '../components/movies/MovieCard'
 import { MovieContext } from '../context/MovieContext'
 
 function SeriesPage() {
-  const { popularSeries, deleteItem, bookmarkItem } = useContext(MovieContext)
+  const { popularSeries, deleteItem, bookmarkItem, isBookmarked } =
+    useContext(MovieContext)
 
-  console.log('Home page - popularSeries.length', popularSeries.length)
   const hasSeries = popularSeries?.length > 0 ?? false
+
+  const showMovies = isBookmarked(popularSeries)
 
   return (
     <SectionLayout inputHolder='Search for TV series'>
       <Grid title='TV Series'>
         {hasSeries &&
-          popularSeries.map((movie) => (
+          showMovies.map((movie) => (
             <MovieCard
               key={`${movie.id}-card`}
               movie={movie}

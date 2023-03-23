@@ -7,8 +7,6 @@ import { MovieContext } from '../context/MovieContext'
 
 function MoviesPage() {
   const { deleteItem, bookmarkItem, popularMovies } = useContext(MovieContext)
-
-  console.log('Home page - popularMovies.length', popularMovies?.length)
   const hasMovies = popularMovies?.length > 0 ?? false
 
   return (

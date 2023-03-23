@@ -15,7 +15,6 @@ function HomePage() {
     useContext(MovieContext)
 
   const hasTrendingMovies = trending?.length > 0 ?? false
-  console.log('Home page - popular.length', popular.length)
   const hasMovies = popular?.length > 0 ?? false
 
   return (

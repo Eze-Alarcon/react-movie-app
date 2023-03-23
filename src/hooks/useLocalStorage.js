@@ -24,7 +24,29 @@ function useLocalStorage(initialValue) {
     setBookmarks(newItem)
   }
 
-  return { myBookmarks: bookmarks, saveInLocalStorage }
+  function bookmarkItem(item) {
+    const mapItem = {
+      ...item,
+      saved: true
+    }
+    const alreadySaved = bookmarks.some((item) => item.id === mapItem.id)
+    if (alreadySaved) return
+    const newItems = [...bookmarks]
+    newItems.push(mapItem)
+    saveInLocalStorage(newItems)
+  }
+
+  function deleteItem(movieID) {
+    const newItems = [...bookmarks]
+    const searchIndex = newItems.findIndex((el) => el.id === movieID)
+
+    if (searchIndex === -1) return
+
+    newItems.splice(searchIndex, 1)
+    saveInLocalStorage(newItems)
+  }
+
+  return { myBookmarks: bookmarks, saveInLocalStorage, bookmarkItem, deleteItem }
 }
 
 export { useLocalStorage }
