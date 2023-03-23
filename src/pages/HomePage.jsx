@@ -11,35 +11,38 @@ import { MoviePoster } from '../components/movies/MoviePoster'
 import { SwiperSlide } from 'swiper/react'
 
 function HomePage() {
-  const { trending, popular } = useContext(MovieContext)
-  const carrouselItems = [...trending] ?? null
+  const { trending, popular, deleteItem, bookmarkItem } =
+    useContext(MovieContext)
 
-  const { deleteItem, saveItem } = useContext(MovieContext)
+  const hasTrendingMovies = trending?.length > 0 ?? false
+  console.log('Home page - popular.length', popular.length)
+  const hasMovies = popular?.length > 0 ?? false
 
   return (
     <HomeLayout inputHolder='Search for movies or TV series'>
-      {carrouselItems.length > 1 && (
+      {hasTrendingMovies && (
         <Carrousel>
           {trending.map((movie) => (
             <SwiperSlide key={`${movie.id}-carrousel`}>
               <MoviePoster
                 movie={movie}
                 deleteItem={deleteItem}
-                saveItem={saveItem}
+                saveItem={bookmarkItem}
               />
             </SwiperSlide>
           ))}
         </Carrousel>
       )}
       <Grid title='Recommended for you'>
-        {popular.map((movie) => (
-          <MovieCard
-            key={`${movie.id}-card`}
-            movie={movie}
-            deleteItem={deleteItem}
-            saveItem={saveItem}
-          />
-        ))}
+        {hasMovies &&
+          popular.map((movie) => (
+            <MovieCard
+              key={`${movie.id}-card`}
+              movie={movie}
+              deleteItem={deleteItem}
+              saveItem={bookmarkItem}
+            />
+          ))}
       </Grid>
     </HomeLayout>
   )

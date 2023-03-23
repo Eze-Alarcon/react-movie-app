@@ -6,19 +6,23 @@ import { Grid } from '../layout/Grid'
 import { MovieCard } from '../components/movies/MovieCard'
 
 function BookmarkPages() {
-  const { bookmarks, deleteItem, saveItem } = useContext(MovieContext)
+  const { myBookmarks, deleteItem, saveItem } = useContext(MovieContext)
+
+  console.log('Home page - bookmarks.length', myBookmarks?.length > 0)
+  const hasBookmarks = myBookmarks?.length > 0 ?? false
 
   return (
     <SectionLayout inputHolder='Search for bookmarked movie or TV shows'>
       <Grid title='My bookmarks'>
-        {bookmarks.map((movie) => (
-          <MovieCard
-            key={`${movie.id}-card`}
-            movie={movie}
-            deleteItem={deleteItem}
-            saveItem={saveItem}
-          />
-        ))}
+        {hasBookmarks &&
+          myBookmarks.map((movie) => (
+            <MovieCard
+              key={`${movie.id}-card`}
+              movie={movie}
+              deleteItem={deleteItem}
+              saveItem={saveItem}
+            />
+          ))}
       </Grid>
     </SectionLayout>
   )

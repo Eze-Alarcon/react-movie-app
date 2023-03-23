@@ -6,19 +6,23 @@ import { MovieCard } from '../components/movies/MovieCard'
 import { MovieContext } from '../context/MovieContext'
 
 function SeriesPage() {
-  const { popularSeries, deleteItem, saveItem } = useContext(MovieContext)
+  const { popularSeries, deleteItem, bookmarkItem } = useContext(MovieContext)
+
+  console.log('Home page - popularSeries.length', popularSeries.length)
+  const hasSeries = popularSeries?.length > 0 ?? false
 
   return (
     <SectionLayout inputHolder='Search for TV series'>
       <Grid title='TV Series'>
-        {popularSeries.map((movie) => (
-          <MovieCard
-            key={`${movie.id}-card`}
-            movie={movie}
-            deleteItem={deleteItem}
-            saveItem={saveItem}
-          />
-        ))}
+        {hasSeries &&
+          popularSeries.map((movie) => (
+            <MovieCard
+              key={`${movie.id}-card`}
+              movie={movie}
+              deleteItem={deleteItem}
+              saveItem={bookmarkItem}
+            />
+          ))}
       </Grid>
     </SectionLayout>
   )

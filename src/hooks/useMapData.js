@@ -3,10 +3,10 @@
 /* eslint-disable comma-dangle */
 
 import config from '../storage/config.json'
+const backupImage = '/images/image-not-found.jpg'
 
-function mapData(rawData, option) {
+function mapData(rawData) {
   const { images } = config
-  const backupImage = '/images/image-not-found.jpg'
 
   if (!Array.isArray(rawData)) throw new Error('Wrong data type entry')
 
@@ -33,7 +33,6 @@ function mapData(rawData, option) {
       type: mappedType,
       saved: mappedSaved,
       id: item.id,
-      section: option
     }
   })
   return mapData

@@ -1,109 +1,110 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable space-before-function-paren */
 import { createContext, useEffect, useState } from 'react'
-import apiPopularMovies from '../mocks/popularMovies.json'
+import apiMovies from '../mocks/popularMovies.json'
 import apiPopular from '../mocks/popular.json'
-import apiPopularSeries from '../mocks/popularSeries.json'
+import apiSeries from '../mocks/popularSeries.json'
 import apiTrending from '../mocks/trendingAll.json'
 // import witoutResults from '../mocks/withoutResults.json'
 import { mapData } from '../hooks/useMapData'
-// import { useLocalStorage } from '../hooks/useLocalStorage'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 const MovieContext = createContext()
 
 function MovieProvider({ children }) {
-  const [bookmarks, setBookmarks] = useState([])
-  const DB_NAME = 'BOOKMARKS_V1'
+  const { myBookmarks, saveInLocalStorage } = useLocalStorage([])
   // states
-  const [allData, setAllData] = useState([])
+  // const [allData, setAllData] = useState([])
   const [popular, setPopular] = useState([])
   const [series, setSeries] = useState([])
   const [popularMovies, setPopularMovies] = useState([])
   const [trending, setTrending] = useState([])
-  const [url, setUrl] = useState('')
+  const [url, setUrl] = useState(null)
 
-  function initialState() {
-    const popularResponse = mapData(apiPopular.results, 'popular')
-    const popularMoviesResponse = mapData(apiPopularMovies.results, 'movies')
-
-    const popularSeriesResponse = mapData(apiPopularSeries.results, 'series')
-
-    const trendingResponse = mapData(apiTrending.results, 'trending')
-
-    const response = [
-      ...popularResponse,
-      ...popularMoviesResponse,
-      ...popularSeriesResponse,
-      ...trendingResponse,
-    ]
-
-    return response
-  }
-
-  function getBookmarksFromDB() {
-    const localStorageItem = window.localStorage.getItem(DB_NAME)
-    let parsedItem
-    // new user?
-    if (!localStorageItem) {
-      window.localStorage.setItem(DB_NAME, JSON.stringify([]))
-      parsedItem = []
-    } else {
-      parsedItem = JSON.parse(localStorageItem)
-    }
-
-    setBookmarks(parsedItem)
-  }
-
-  useEffect(() => {
+  function detectLocation() {
     const actualURL = window.location.href
     const path = actualURL.split('/').at(-1)
+
     if (path === '') setUrl('home')
     if (path === 'movies') setUrl('movies')
     if (path === 'tv') setUrl('series')
-    if (path === 'bookmark') return
-    const response = initialState()
+    if (path === 'bookmark') setUrl('bookmark')
+  }
 
-    getBookmarksFromDB()
+  function isBookmarked(arr) {
+    if (!Array.isArray(arr)) return
+    const checkSaved = arr.map((item) => {
+      const bookmarked = myBookmarks.some((el) => el.id === item.id)
 
-    const checkSaved = response.map((item) => {
-      const isSaved = bookmarks.some((el) => el.id === item.id)
-
+      if (bookmarked) {
+        console.log({
+          name: item.title,
+          id: item.id,
+          bookmarked,
+        })
+      }
       return {
         ...item,
-        saved: isSaved,
+        saved: bookmarked,
       }
     })
-
-    setAllData(() => checkSaved)
-  }, [])
-
-  function filterByCategory(category) {
-    const data = allData
-    const dataFilter = data.filter((item) => item.section === category)
-    return dataFilter
+    return checkSaved
   }
 
   function loadHomeItems() {
-    const newTrending = filterByCategory('trending')
-    const newPopular = filterByCategory('popular')
+    const mapTrending = mapData(apiTrending.results)
+    const mapPopular = mapData(apiPopular.results)
+    const newTrending = isBookmarked(mapTrending)
+    const newPopular = isBookmarked(mapPopular)
     setTrending(newTrending)
     setPopular(newPopular)
   }
 
   function loadMovieSection() {
-    const newPopularMovies = filterByCategory('movies')
-    setPopularMovies(newPopularMovies)
+    const mapMovies = mapData(apiMovies.results)
+    const newMovies = isBookmarked(mapMovies)
+    setPopularMovies(newMovies)
   }
 
   function loadSeries() {
-    const newSeries = filterByCategory('series')
+    const mapSeries = mapData(apiSeries.results)
+    const newSeries = isBookmarked(mapSeries)
     setSeries(newSeries)
   }
 
-  useEffect(() => {
-    if (url === 'bookmark') return
+  function bookmarkItem(item) {
+    const mapItem = {
+      ...item,
+      saved: true,
+    }
+    const alreadySaved = myBookmarks.some((item) => item.id === mapItem.id)
+    if (alreadySaved) return
+    const newItems = [...myBookmarks]
+    newItems.push(mapItem)
+    saveInLocalStorage(newItems)
+    // const newData = [...allData]
+    // const index = newData.findIndex((item) => item.id === mapItem.id)
+    // newData[index].saved = true
+    // setAllData(newData)
+  }
 
-    if (allData.length < 1) return
+  function deleteItem(movieID) {
+    const newItems = [...myBookmarks]
+    const searchIndex = newItems.findIndex((el) => el.id === movieID)
+
+    if (searchIndex === -1) return
+
+    newItems.splice(searchIndex, 1)
+    saveInLocalStorage(newItems)
+
+    // const newData = [...allData]
+    // const index = newData.findIndex((item) => item.id === movieID)
+    // newData[index].saved = false
+    // setAllData(newData)
+  }
+
+  useEffect(() => {
+    if (url === null || url === 'bookmark') return
 
     if (url === 'home') {
       loadHomeItems()
@@ -116,58 +117,23 @@ function MovieProvider({ children }) {
     if (url === 'series') {
       loadSeries()
     }
-  }, [url, allData])
+  }, [url])
 
-  function saveItem(item) {
-    const mapItem = {
-      ...item,
-      saved: true,
-    }
-    const alreadySaved = bookmarks.some((item) => item.id === mapItem.id)
-    if (alreadySaved) return
-    const newItems = [...bookmarks]
-    newItems.push(mapItem)
-    const newData = [...allData]
-    const index = newData.findIndex((item) => item.id === mapItem.id)
-    newData[index].saved = true
-    saveBookmarks(newItems)
-    setAllData(newData)
-  }
-
-  function deleteItem(movieID) {
-    const newItems = [...bookmarks]
-    const searchIndex = newItems.findIndex((el) => el.id === movieID)
-
-    if (searchIndex === -1) return
-
-    newItems.splice(searchIndex, 1)
-    saveBookmarks(newItems)
-
-    const newData = [...allData]
-    const index = newData.findIndex((item) => item.id === movieID)
-    newData[index].saved = false
-    setAllData(newData)
-  }
-
-  function saveBookmarks(newItem) {
-    window.localStorage.setItem(DB_NAME, JSON.stringify(newItem))
-    setBookmarks(newItem)
-  }
+  useEffect(() => {
+    detectLocation()
+  }, [])
 
   const states = {
-    allData,
     popularMovies,
     popular,
     popularSeries: series,
     trending,
-    bookmarks,
+    myBookmarks,
   }
 
   const functions = {
-    filterByCategory,
-    setAllData,
     setUrl,
-    saveItem,
+    bookmarkItem,
     deleteItem,
   }
 
