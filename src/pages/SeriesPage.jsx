@@ -11,13 +11,13 @@ function SeriesPage() {
 
   const hasSeries = popularSeries?.length > 0 ?? false
 
-  const showMovies = isBookmarked(popularSeries)
+  const showSeries = isBookmarked(popularSeries)
 
   return (
     <SectionLayout inputHolder='Search for TV series'>
       <Grid title='TV Series'>
         {hasSeries &&
-          showMovies.map((movie) => (
+          showSeries.map((movie) => (
             <MovieCard
               key={`${movie.id}-card`}
               movie={movie}
