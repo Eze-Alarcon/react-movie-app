@@ -1,26 +1,25 @@
 /* eslint space-before-function-paren: 0 */
 import { useEffect, useState } from 'react'
-// const DB_NAME = 'BOOKMARKS_V1'
 
-function useLocalStorage(initialValue, DB_NAME) {
+function useSessionStorage(initialValue, DB_NAME) {
   const [items, setItems] = useState([])
 
   useEffect(() => {
-    const localStorageItem = window.localStorage.getItem(DB_NAME)
+    const sessionStorage = window.sessionStorage.getItem(DB_NAME)
     let parsedItem
     // new user?
-    if (!localStorageItem) {
-      window.localStorage.setItem(DB_NAME, JSON.stringify(initialValue))
+    if (!sessionStorage) {
+      window.sessionStorage.setItem(DB_NAME, JSON.stringify(initialValue))
       parsedItem = []
     } else {
-      parsedItem = JSON.parse(localStorageItem)
+      parsedItem = JSON.parse(sessionStorage)
     }
 
     setItems(parsedItem)
   }, [])
 
   function save(newItem) {
-    window.localStorage.setItem(DB_NAME, JSON.stringify(newItem))
+    window.sessionStorage.setItem(DB_NAME, JSON.stringify(newItem))
     setItems(newItem)
   }
 
@@ -37,4 +36,4 @@ function useLocalStorage(initialValue, DB_NAME) {
   return { items, save, remove }
 }
 
-export { useLocalStorage }
+export { useSessionStorage }

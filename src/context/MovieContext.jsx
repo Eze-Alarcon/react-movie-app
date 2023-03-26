@@ -7,7 +7,7 @@ import { getItems, API_ENDPOINTS } from '../services/fetchData'
 const MovieContext = createContext()
 
 function MovieProvider({ children }) {
-  const { myBookmarks, bookmarkItem, deleteItem } = useLocalStorage([])
+  const myBookmarksLS = useLocalStorage([])
 
   const [loading, setLoading] = useState(true)
   const [trending, setTrending] = useState([])
@@ -20,6 +20,20 @@ function MovieProvider({ children }) {
 
   const [searchedValue, setSearchedValue] = useState('')
 
+  function bookmarkItem(item) {
+    const mapItem = {
+      ...item,
+      saved: true,
+    }
+    const alreadySaved = myBookmarksLS.items.some(
+      (item) => item.id === mapItem.id
+    )
+    if (alreadySaved) return
+    const newItems = [...myBookmarksLS.items]
+    newItems.push(mapItem)
+    myBookmarksLS.save(newItems)
+  }
+
   function handleSearch(event) {
     event.preventDefault()
     const val = event.target.value.toLowerCase().trimStart()
@@ -27,7 +41,7 @@ function MovieProvider({ children }) {
   }
 
   useEffect(() => {
-    const arr = [...myBookmarks]
+    const arr = [...myBookmarksLS.items]
     setShowBM(arr)
     if (searchedValue.length <= 3) return
 
@@ -51,7 +65,7 @@ function MovieProvider({ children }) {
   function isBookmarked(arr) {
     if (!Array.isArray(arr)) return
     const checkSaved = arr.map((item) => {
-      const bookmarked = myBookmarks.some((el) => el.id === item.id)
+      const bookmarked = myBookmarksLS.items.some((el) => el.id === item.id)
       return {
         ...item,
         saved: bookmarked,
@@ -115,7 +129,7 @@ function MovieProvider({ children }) {
       loadSeries()
     }
     if (url === 'bookmark') {
-      const arr = [...myBookmarks]
+      const arr = [...myBookmarksLS.items]
       setShowBM(arr)
     }
   }, [url])
@@ -139,7 +153,7 @@ function MovieProvider({ children }) {
   const functions = {
     setUrl,
     bookmarkItem,
-    deleteItem,
+    deleteItem: myBookmarksLS.remove,
     isBookmarked,
     handleSearch,
   }
