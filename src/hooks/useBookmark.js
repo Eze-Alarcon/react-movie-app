@@ -2,7 +2,7 @@
 /* eslint-disable space-before-function-paren */
 import { useEffect, useRef, useState } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
-import { DB_NAMES } from '../storage/enpoints'
+import { DB_NAMES } from '../storage/contants'
 
 function useBookmark() {
   const myBookmarks = useLocalStorage([], DB_NAMES.BOOKMAKRS)

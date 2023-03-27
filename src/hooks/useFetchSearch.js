@@ -11,6 +11,9 @@ function useFetchSearch({ endpoint, mediaType, query }) {
 
   useEffect(() => {
     if (query.length <= 3) {
+      if (controller) {
+        controller.abort()
+      }
       return
     }
     const abortController = new AbortController()
@@ -29,17 +32,10 @@ function useFetchSearch({ endpoint, mediaType, query }) {
     return () => abortController.abort()
   }, [query])
 
-  function handleCancelRequest() {
-    if (controller) {
-      controller.abort()
-    }
-  }
-
   return {
     items: data,
     error,
-    loading,
-    handleCancelRequest
+    loading
   }
 }
 

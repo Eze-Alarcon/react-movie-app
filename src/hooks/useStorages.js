@@ -1,6 +1,6 @@
 /* eslint-disable space-before-function-paren */
 
-import { DB_NAMES } from '../storage/enpoints'
+import { DB_NAMES } from '../storage/contants'
 import { useSessionStorage } from './useSessionStorage'
 
 function useStorages() {
