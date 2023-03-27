@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint space-before-function-paren: 0 */
 
 import React from 'react'
@@ -12,8 +13,18 @@ import { MoviesPage } from './pages/MoviesPage'
 import { BookmarkPages } from './pages/BookmarkPages'
 import { Routes, Route } from 'react-router-dom'
 import { Modal } from './components/modal/Modal'
+import { useBookmark } from './hooks/useBookmark'
 
 function App() {
+  const {
+    removeBookmark,
+    bookmarkItem,
+    isBookmarked,
+    myBookmarks,
+    items,
+    handleSearch,
+    searchBookmark,
+  } = useBookmark()
   return (
     <>
       <MovieProvider>
@@ -21,10 +32,50 @@ function App() {
           <Header />
           <Modal />
           <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/movies' element={<MoviesPage />} />
-            <Route path='/tv' element={<SeriesPage />} />
-            <Route path='/bookmark' element={<BookmarkPages />} />
+            <Route
+              path='/'
+              element={
+                <HomePage
+                  removeBookmark={removeBookmark}
+                  bookmarkItem={bookmarkItem}
+                  isBookmarked={isBookmarked}
+                />
+              }
+            />
+            <Route
+              path='/movies'
+              element={
+                <MoviesPage
+                  removeBookmark={removeBookmark}
+                  bookmarkItem={bookmarkItem}
+                  isBookmarked={isBookmarked}
+                />
+              }
+            />
+            <Route
+              path='/tv'
+              element={
+                <SeriesPage
+                  removeBookmark={removeBookmark}
+                  bookmarkItem={bookmarkItem}
+                  isBookmarked={isBookmarked}
+                />
+              }
+            />
+            <Route
+              path='/bookmark'
+              element={
+                <BookmarkPages
+                  removeBookmark={removeBookmark}
+                  bookmarkItem={bookmarkItem}
+                  isBookmarked={isBookmarked}
+                  myBookmarks={myBookmarks}
+                  items={items}
+                  handleSearch={handleSearch}
+                  searchBookmark={searchBookmark}
+                />
+              }
+            />
           </Routes>
         </ModalProvider>
       </MovieProvider>

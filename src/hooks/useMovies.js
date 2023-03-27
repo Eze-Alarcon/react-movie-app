@@ -1,39 +1,34 @@
 /* eslint-disable camelcase */
 /* eslint-disable comma-dangle */
 /* eslint space-before-function-paren: 0 */
-import { useContext } from 'react'
-import { MovieContext } from '../context/MovieContext.jsx'
 
 function useMovies() {
-  const {
-    filterByCategory,
-    setPopular,
-    setSeries,
-    setPopularMovies,
-    setTrending
-  } = useContext(MovieContext)
+  // async function loadHomeItems() {
+  //   const trendingDay = await getItems({ url: API_ENDPOINTS.TRENDING_DAY })
+  //   const trendingWeek = await getItems({ url: API_ENDPOINTS.TRENDING_WEEK })
+  //   if (trendingDay.length > 0 && trendingWeek.length > 0) {
+  //     setTrending(trendingDay)
+  //     setPopular(trendingWeek)
+  //     setError(false)
+  //   } else {
+  //     setTrending([])
+  //     setPopular([])
+  //     setError(true)
+  //   }
+  //   setLoading(false)
+  // }
 
-  function loadHomeItems() {
-    const newTrending = filterByCategory('trending')
-    const newPopular = filterByCategory('popular')
-    setTrending(newTrending)
-    setPopular(newPopular)
+  const states = {
+
   }
 
-  function loadMovieSection() {
-    const newPopularMovies = filterByCategory('movies')
-    setPopularMovies(newPopularMovies)
-  }
+  const functions = {
 
-  function loadSeries() {
-    const newSeries = filterByCategory('series')
-    setSeries(newSeries)
   }
 
   return {
-    loadHomeItems,
-    loadMovieSection,
-    loadSeries,
+    ...states,
+    ...functions,
   }
 }
 

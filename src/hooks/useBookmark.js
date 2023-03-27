@@ -1,17 +1,13 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable space-before-function-paren */
-import { createContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
-const MovieContext = createContext()
-
-function MovieProvider({ children }) {
+function useBookmark() {
   const myBookmarks = useLocalStorage([])
-
+  const [searchBookmark, setSearchBookmark] = useState('')
   const [showBM, setShowBM] = useState([])
   const [url, setUrl] = useState(null)
-
-  const [searchedValue, setSearchedValue] = useState('')
 
   function bookmarkItem(item) {
     const mapItem = {
@@ -42,20 +38,8 @@ function MovieProvider({ children }) {
   function handleSearch(event) {
     event.preventDefault()
     const val = event.target.value.toLowerCase().trimStart()
-    setSearchedValue(val)
+    setSearchBookmark(val)
   }
-
-  useEffect(() => {
-    const arr = [...myBookmarks.items]
-    setShowBM(arr)
-    if (searchedValue.length <= 3) return
-
-    const filter = arr.filter((item) =>
-      item.title.toLowerCase().includes(searchedValue)
-    )
-
-    setShowBM(filter)
-  }, [searchedValue])
 
   function detectLocation() {
     const actualURL = window.location.href
@@ -68,19 +52,19 @@ function MovieProvider({ children }) {
   }
 
   useEffect(() => {
-    if (url === null) return
+    const arr = [...myBookmarks.items]
+    setShowBM(arr)
 
-    if (url === 'home') {
-      // loadHomeItems()
-      return
-    }
-    if (url === 'movies') {
-      // loadMovieSection()
-      return
-    }
-    if (url === 'series') {
-      // loadSeries()
-    }
+    if (searchBookmark.length <= 3) return
+
+    const filter = arr.filter((item) =>
+      item.title.toLowerCase().includes(searchBookmark)
+    )
+
+    setShowBM(filter)
+  }, [searchBookmark])
+
+  useEffect(() => {
     if (url === 'bookmark') {
       const arr = [...myBookmarks.items]
       setShowBM(arr)
@@ -92,24 +76,21 @@ function MovieProvider({ children }) {
   }, [])
 
   const states = {
-    myBookmarks: showBM,
+    myBookmarks: myBookmarks.items,
+    searchBookmark,
     url,
-    searchedValue,
+    items: showBM
   }
 
   const functions = {
-    setUrl,
     bookmarkItem,
     removeBookmark: myBookmarks.remove,
     isBookmarked,
     handleSearch,
+    setUrl,
   }
 
-  return (
-    <MovieContext.Provider value={{ ...states, ...functions }}>
-      {children}
-    </MovieContext.Provider>
-  )
+  return { ...states, ...functions }
 }
 
-export { MovieContext, MovieProvider }
+export { useBookmark }
