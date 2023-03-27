@@ -1,31 +1,66 @@
+/* eslint-disable comma-dangle */
 /* eslint space-before-function-paren: 0 */
-import React, { Suspense } from 'react'
+
+import React from 'react'
 import { SectionLayout } from '../layout/SectionLayout'
 import { Grid } from '../layout/Grid'
 import { MovieCard } from '../components/movies/MovieCard'
-import { API_ENDPOINTS } from '../storage/enpoints'
+import {
+  API_ENDPOINTS,
+  MEDIA_TYPES,
+  SEARCH_ENDPOINTS,
+} from '../storage/contants'
 import { useFetch } from '../hooks/useFetch'
+import { useSearch } from '../hooks/useSearch'
+import { useFetchSearch } from '../hooks/useFetchSearch'
 
 function SeriesPage({ removeBookmark, bookmarkItem, isBookmarked, cache }) {
-  const mediaType = 'tv'
-  const DATA = useFetch(API_ENDPOINTS.SERIES, cache, mediaType)
+  const { handleSearch, searchedValue, query } = useSearch()
+  let searchedItems = []
+
+  const SEARCH_FETCH = useFetchSearch({
+    endpoint: SEARCH_ENDPOINTS.SERIES,
+    mediaType: MEDIA_TYPES.SERIE,
+    query,
+  })
+  const DATA = useFetch(API_ENDPOINTS.SERIES, cache, MEDIA_TYPES.SERIE)
+
   const showSeries = isBookmarked(DATA.items)
 
+  if (SEARCH_FETCH.items.length > 0) {
+    searchedItems = isBookmarked(SEARCH_FETCH.items)
+  }
+
+  const searching = searchedValue.length > 3
+
   return (
-    <SectionLayout inputHolder='Search for TV series'>
+    <SectionLayout
+      inputHolder='Search for TV series'
+      multiSearch={handleSearch}
+      searchedValue={searchedValue}
+    >
       <Grid title='TV Series'>
         {DATA.error && <p>There was an error...</p>}
-        <Suspense fallback={<p>Loading...</p>}>
-          {!DATA.loading &&
-            showSeries?.map((movie) => (
-              <MovieCard
-                key={`${movie.id}-card`}
-                movie={movie}
-                deleteItem={removeBookmark}
-                saveItem={bookmarkItem}
-              />
-            ))}
-        </Suspense>
+        {!DATA.loading &&
+          !searching &&
+          showSeries?.map((movie) => (
+            <MovieCard
+              key={`${movie.id}-card`}
+              movie={movie}
+              deleteItem={removeBookmark}
+              saveItem={bookmarkItem}
+            />
+          ))}
+        {!SEARCH_FETCH.loading &&
+          searching &&
+          searchedItems?.map((movie) => (
+            <MovieCard
+              key={`${movie.id}-card`}
+              movie={movie}
+              deleteItem={removeBookmark}
+              saveItem={bookmarkItem}
+            />
+          ))}
       </Grid>
     </SectionLayout>
   )

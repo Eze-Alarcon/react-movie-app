@@ -1,33 +1,28 @@
 /* eslint-disable space-before-function-paren */
 
-import { useMemo, useState } from 'react'
+import { useState, useMemo } from 'react'
 import { debounceFunction } from '../utils/debounce'
 
 function useSearch() {
   const [searchedValue, setSearchedValue] = useState('')
+  const [query, setQuery] = useState('')
 
   function handleSearch(event) {
     event.preventDefault()
-    const query = event.target.value.toLowerCase().trimStart()
-    setSearchedValue(query)
-    // memo(query)
+    const input = event.target.value.toLowerCase().trimStart()
+    setSearchedValue(input)
+    debounceQuery(input)
   }
 
-  // const memo = useMemo(function () {
-  //   function checkData(query) {
-  //     setSearchedValue(query)
-  //   }
+  const debounceQuery = useMemo(function () {
+    function memoQuery(query) {
+      setQuery(query)
+    }
 
-  //   return debounceFunction(checkData, 350)
-  // }, [])
+    return debounceFunction(memoQuery, 350)
+  }, [])
 
-  // function handleChanges(event) {
-  //   const data = event.target.value
-  //   setVal(data)
-  //   memo(data)
-  // }
-
-  return { handleSearch, searchedValue, setSearchedValue }
+  return { handleSearch, searchedValue, setSearchedValue, query }
 }
 
 export { useSearch }

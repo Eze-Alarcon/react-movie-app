@@ -3,39 +3,31 @@
 import { useEffect, useState } from 'react'
 import { mapData } from '../utils/mapData'
 
-function useFetchSearch(endpoint, itemsType, search) {
+function useFetchSearch({ endpoint, mediaType, query }) {
   const [data, setData] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
   const [controller, setController] = useState(null)
 
   useEffect(() => {
-    if (search.length <= 3) {
+    if (query.length <= 3) {
       return
     }
     const abortController = new AbortController()
     setController(abortController)
     setLoading(true)
 
-    const url = `${endpoint}${new URLSearchParams({ query: search }).toString()}`
-    console.log(url)
+    const url = `${endpoint}${new URLSearchParams({ query }).toString()}`
 
     fetch(url)
       .then(res => res.json())
-      .then(rawData => mapData(rawData.results, itemsType))
+      .then(rawData => mapData(rawData.results, mediaType))
       .then(data => setData(data))
-      .catch((e) => {
-        if (e.name === 'AbortError') {
-          console.log('Request Cancelled')
-        } else {
-          setError(true)
-          console.log(e)
-        }
-      })
+      .catch((e) => setError(true))
       .finally(() => setLoading(false))
 
     return () => abortController.abort()
-  }, [search])
+  }, [query])
 
   function handleCancelRequest() {
     if (controller) {
