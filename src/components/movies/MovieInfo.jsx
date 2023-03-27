@@ -1,5 +1,6 @@
 /* eslint space-before-function-paren: 0 */
 /* eslint-disable comma-dangle */
+
 import React from 'react'
 import {
   CategoryMovie,

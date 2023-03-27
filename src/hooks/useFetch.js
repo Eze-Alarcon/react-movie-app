@@ -9,9 +9,8 @@ function useFetch(endpoint, cache, itemsType) {
   const [controller, setController] = useState(null)
 
   useEffect(() => {
-    if (cache.items.length > 0) {
-      return
-    }
+    if (cache.items.length > 0) { return }
+
     const abortController = new AbortController()
     setController(abortController)
     setLoading(true)
@@ -20,14 +19,7 @@ function useFetch(endpoint, cache, itemsType) {
       .then(res => res.json())
       .then(rawData => mapData(rawData.results, itemsType))
       .then(data => cache.save(data))
-      .catch((e) => {
-        if (e.name === 'AbortError') {
-          console.log('Request Cancelled')
-        } else {
-          setError(true)
-          console.log(e)
-        }
-      })
+      .catch((e) => setError(true))
       .finally(() => setLoading(false))
 
     return () => abortController.abort()

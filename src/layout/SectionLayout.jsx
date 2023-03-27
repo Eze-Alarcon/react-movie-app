@@ -1,6 +1,7 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable multiline-ternary */
 /* eslint-disable space-before-function-paren */
+
 import React from 'react'
 import { SearchBar } from '../components/shared/SearchBar'
 import { SearchBookmark } from '../components/shared/SearchBookmark'

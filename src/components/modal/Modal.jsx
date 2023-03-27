@@ -1,6 +1,7 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable comma-dangle */
 /* eslint-disable space-before-function-paren */
+
 import React, { useContext } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { ModalContext } from '../../context/ModalContext'
@@ -41,11 +42,7 @@ function Modal() {
       {modalStatus.open ? (
         <>
           {createPortal(
-            <ModalContent
-              onClose={close}
-              dropIn={dropIn}
-              // movieData={modalStatus.information}
-            />,
+            <ModalContent onClose={close} dropIn={dropIn} />,
             document.body
           )}
         </>

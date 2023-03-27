@@ -46,6 +46,7 @@ function HomePage({
       searchedValue={searchedValue}
     >
       {CARROUSEL_ITEMS.error && <p>There was an error...</p>}
+      {CARROUSEL_ITEMS.loading && <p>Loading...</p>}
       {!CARROUSEL_ITEMS.loading && !searching && (
         <Carrousel>
           {carrouselItems?.map((movie) => (
@@ -61,6 +62,7 @@ function HomePage({
       )}
       <Grid title='Recommended for you'>
         {GRID_ITEMS.error && <p>There was an error....</p>}
+        {GRID_ITEMS.loading && <p>Loading...</p>}
         {!GRID_ITEMS.loading &&
           !searching &&
           gridItems?.map((movie) => (

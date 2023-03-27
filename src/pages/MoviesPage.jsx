@@ -5,14 +5,14 @@ import React from 'react'
 import { SectionLayout } from '../layout/SectionLayout'
 import { Grid } from '../layout/Grid'
 import { MovieCard } from '../components/movies/MovieCard'
+import { useFetch } from '../hooks/useFetch'
+import { useSearch } from '../hooks/useSearch'
+import { useFetchSearch } from '../hooks/useFetchSearch'
 import {
   API_ENDPOINTS,
   SEARCH_ENDPOINTS,
   MEDIA_TYPES,
 } from '../storage/contants'
-import { useFetch } from '../hooks/useFetch'
-import { useSearch } from '../hooks/useSearch'
-import { useFetchSearch } from '../hooks/useFetchSearch'
 
 function MoviesPage({ removeBookmark, bookmarkItem, isBookmarked, cache }) {
   const { handleSearch, searchedValue, query } = useSearch()

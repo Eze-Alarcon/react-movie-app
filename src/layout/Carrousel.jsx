@@ -22,7 +22,6 @@ function Carrousel({ children }) {
           loop
           breakpoints={{
             0: {
-              centeredSlides: true,
               freeMode: true,
             },
             1024: {
