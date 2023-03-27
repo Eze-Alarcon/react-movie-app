@@ -1,6 +1,6 @@
 /* eslint-disable comma-dangle */
 /* eslint space-before-function-paren: 0 */
-import React, { Suspense } from 'react'
+import React from 'react'
 import { SectionLayout } from '../layout/SectionLayout'
 import { Grid } from '../layout/Grid'
 import { MovieCard } from '../components/movies/MovieCard'
@@ -23,17 +23,15 @@ function BookmarkPages({
       searchBookmark={searchBookmark}
     >
       <Grid title='My bookmarks'>
-        <Suspense fallback={<p>Loading...</p>}>
-          {hasBookmarks &&
-            filteredBookmarks.map((movie) => (
-              <MovieCard
-                key={`${movie.id}-card`}
-                movie={movie}
-                deleteItem={removeBookmark}
-                saveItem={bookmarkItem}
-              />
-            ))}
-        </Suspense>
+        {hasBookmarks &&
+          filteredBookmarks.map((movie) => (
+            <MovieCard
+              key={`${movie.id}-card`}
+              movie={movie}
+              deleteItem={removeBookmark}
+              saveItem={bookmarkItem}
+            />
+          ))}
       </Grid>
     </SectionLayout>
   )

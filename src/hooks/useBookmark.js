@@ -1,13 +1,13 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable space-before-function-paren */
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
 function useBookmark() {
   const myBookmarks = useLocalStorage([])
   const [searchBookmark, setSearchBookmark] = useState('')
-  const [showBM, setShowBM] = useState([...myBookmarks.items])
-  console.log(myBookmarks.items)
+  const [showBM, setShowBM] = useState([])
+  const firstRender = useRef(null)
 
   function bookmarkItem(item) {
     const mapItem = {
@@ -55,9 +55,12 @@ function useBookmark() {
   }, [searchBookmark])
 
   useEffect(() => {
-    const arr = [...myBookmarks.items]
-    setShowBM(arr)
-  }, [])
+    if (firstRender.current === null && myBookmarks.items.length > 0) {
+      firstRender.current = true
+      const arr = [...myBookmarks.items]
+      setShowBM(arr)
+    }
+  }, [myBookmarks])
 
   const states = {
     myBookmarks: myBookmarks.items,
