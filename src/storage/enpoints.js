@@ -8,9 +8,9 @@ const API_ENDPOINTS = {
 }
 
 const SEARCH_ENDPOINTS = {
-  MOVIES: `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`,
-  MULTI_SEARCH: ` https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`,
-  SERIES: ` https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`
+  MOVIES: `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&`,
+  MULTI_SEARCH: ` https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&`,
+  SERIES: ` https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&`
 }
 
 const DB_NAMES = {

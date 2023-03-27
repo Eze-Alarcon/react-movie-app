@@ -8,14 +8,14 @@ function useSearch() {
 
   function handleSearch(event) {
     event.preventDefault()
-    const { search } = Object.fromEntries(new FormData(event.target))
-    if (search === '') return
-    setSearchedValue(search.toLowerCase())
+    const query = event.target.value.toLowerCase().trimStart()
+    setSearchedValue(query)
+    // memo(query)
   }
 
   // const memo = useMemo(function () {
-  //   function checkData(data) {
-  //     console.log(data)
+  //   function checkData(query) {
+  //     setSearchedValue(query)
   //   }
 
   //   return debounceFunction(checkData, 350)
