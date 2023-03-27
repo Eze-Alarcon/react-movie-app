@@ -17,13 +17,13 @@ import { useBookmark } from './hooks/useBookmark'
 
 function App() {
   const {
+    myBookmarks,
+    searchBookmark,
+    filteredBookmarks,
     removeBookmark,
     bookmarkItem,
     isBookmarked,
-    myBookmarks,
-    items,
     handleSearch,
-    searchBookmark,
   } = useBookmark()
   return (
     <>
@@ -66,13 +66,13 @@ function App() {
               path='/bookmark'
               element={
                 <BookmarkPages
+                  myBookmarks={myBookmarks}
+                  searchBookmark={searchBookmark}
+                  filteredBookmarks={filteredBookmarks}
                   removeBookmark={removeBookmark}
                   bookmarkItem={bookmarkItem}
                   isBookmarked={isBookmarked}
-                  myBookmarks={myBookmarks}
-                  items={items}
                   handleSearch={handleSearch}
-                  searchBookmark={searchBookmark}
                 />
               }
             />

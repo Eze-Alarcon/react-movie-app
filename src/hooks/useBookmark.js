@@ -6,8 +6,8 @@ import { useLocalStorage } from '../hooks/useLocalStorage'
 function useBookmark() {
   const myBookmarks = useLocalStorage([])
   const [searchBookmark, setSearchBookmark] = useState('')
-  const [showBM, setShowBM] = useState([])
-  const [url, setUrl] = useState(null)
+  const [showBM, setShowBM] = useState([...myBookmarks.items])
+  console.log(myBookmarks.items)
 
   function bookmarkItem(item) {
     const mapItem = {
@@ -41,16 +41,6 @@ function useBookmark() {
     setSearchBookmark(val)
   }
 
-  function detectLocation() {
-    const actualURL = window.location.href
-    const path = actualURL.split('/').at(-1)
-
-    if (path === '') setUrl('home')
-    if (path === 'movies') setUrl('movies')
-    if (path === 'tv') setUrl('series')
-    if (path === 'bookmark') setUrl('bookmark')
-  }
-
   useEffect(() => {
     const arr = [...myBookmarks.items]
     setShowBM(arr)
@@ -65,21 +55,14 @@ function useBookmark() {
   }, [searchBookmark])
 
   useEffect(() => {
-    if (url === 'bookmark') {
-      const arr = [...myBookmarks.items]
-      setShowBM(arr)
-    }
-  }, [url])
-
-  useEffect(() => {
-    detectLocation()
+    const arr = [...myBookmarks.items]
+    setShowBM(arr)
   }, [])
 
   const states = {
     myBookmarks: myBookmarks.items,
     searchBookmark,
-    url,
-    items: showBM
+    filteredBookmarks: showBM
   }
 
   const functions = {
@@ -87,7 +70,6 @@ function useBookmark() {
     removeBookmark: myBookmarks.remove,
     isBookmarked,
     handleSearch,
-    setUrl,
   }
 
   return { ...states, ...functions }
