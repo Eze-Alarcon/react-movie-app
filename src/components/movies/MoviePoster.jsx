@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { MovieInfo } from './MovieInfo'
-import { Mark } from '../../../resources/svg/movies/IconsBookmarks'
+import { Mark } from '../../resources/svg/movies/IconsBookmarks'
 
 function MoviePoster({ movie, deleteItem, saveItem }) {
   const [marked, setMarked] = useState(() => movie.saved)

@@ -1,6 +1,7 @@
 /* eslint-disable space-before-function-paren */
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { debounceFunction } from '../utils/debounce'
 
 function useSearch() {
   const [searchedValue, setSearchedValue] = useState('')
@@ -12,16 +13,21 @@ function useSearch() {
     setSearchedValue(search.toLowerCase())
   }
 
-  function filterArray(arr) {
-    if (searchedValue.length < 3) return arr
+  // const memo = useMemo(function () {
+  //   function checkData(data) {
+  //     console.log(data)
+  //   }
 
-    const filter = arr.filter((item) =>
-      item.title.toLowerCase().includes(searchedValue)
-    )
-    return filter
-  }
+  //   return debounceFunction(checkData, 350)
+  // }, [])
 
-  return { handleSearch, searchedValue, setSearchedValue, filterArray }
+  // function handleChanges(event) {
+  //   const data = event.target.value
+  //   setVal(data)
+  //   memo(data)
+  // }
+
+  return { handleSearch, searchedValue, setSearchedValue }
 }
 
 export { useSearch }
