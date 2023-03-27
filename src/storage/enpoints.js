@@ -13,4 +13,13 @@ const SEARCH_ENDPOINTS = {
   SERIES: ` https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`
 }
 
-export { API_ENDPOINTS, SEARCH_ENDPOINTS }
+const DB_NAMES = {
+  BOOKMAKRS: 'BOOKMARKS_V1',
+  TRENDING_DAY: 'TRENDING_DAY_V1',
+  TRENDING_WEEK: 'TRENDING_WEEK_V1',
+  MOVIES: 'MOVIES_V1',
+  SERIES: 'SERIES_V1'
+
+}
+
+export { API_ENDPOINTS, SEARCH_ENDPOINTS, DB_NAMES }

@@ -6,8 +6,8 @@ import { MovieCard } from '../components/movies/MovieCard'
 import { API_ENDPOINTS } from '../storage/enpoints'
 import { useFetch } from '../hooks/useFetch'
 
-function MoviesPage({ removeBookmark, bookmarkItem, isBookmarked }) {
-  const DATA = useFetch(API_ENDPOINTS.MOVIES)
+function MoviesPage({ removeBookmark, bookmarkItem, isBookmarked, cache }) {
+  const DATA = useFetch(API_ENDPOINTS.MOVIES, cache)
   const showMovies = isBookmarked(DATA.items)
 
   return (

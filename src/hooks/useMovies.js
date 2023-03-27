@@ -2,33 +2,18 @@
 /* eslint-disable comma-dangle */
 /* eslint space-before-function-paren: 0 */
 
-function useMovies() {
-  // async function loadHomeItems() {
-  //   const trendingDay = await getItems({ url: API_ENDPOINTS.TRENDING_DAY })
-  //   const trendingWeek = await getItems({ url: API_ENDPOINTS.TRENDING_WEEK })
-  //   if (trendingDay.length > 0 && trendingWeek.length > 0) {
-  //     setTrending(trendingDay)
-  //     setPopular(trendingWeek)
-  //     setError(false)
-  //   } else {
-  //     setTrending([])
-  //     setPopular([])
-  //     setError(true)
-  //   }
-  //   setLoading(false)
+import { useFetch } from './useFetch'
+import { useSessionStorage } from './useSessionStorage'
+
+function useMovies(endpoint, DB_NAME) {
+  const STORAGE = useSessionStorage([], DB_NAME)
+
+  // if (true) {
+  //   const DATA = useFetch(endpoint)
   // }
 
-  const states = {
-
-  }
-
-  const functions = {
-
-  }
-
   return {
-    ...states,
-    ...functions,
+
   }
 }
 

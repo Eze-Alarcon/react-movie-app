@@ -11,9 +11,15 @@ import { SwiperSlide } from 'swiper/react'
 import { useFetch } from '../hooks/useFetch'
 import { API_ENDPOINTS } from '../storage/enpoints'
 
-function HomePage({ removeBookmark, bookmarkItem, isBookmarked }) {
-  const CARROUSEL_ITEMS = useFetch(API_ENDPOINTS.TRENDING_DAY)
-  const GRID_ITEMS = useFetch(API_ENDPOINTS.TRENDING_WEEK)
+function HomePage({
+  removeBookmark,
+  bookmarkItem,
+  isBookmarked,
+  carrouselCache,
+  gridCache,
+}) {
+  const CARROUSEL_ITEMS = useFetch(API_ENDPOINTS.TRENDING_DAY, carrouselCache)
+  const GRID_ITEMS = useFetch(API_ENDPOINTS.TRENDING_WEEK, gridCache)
 
   const carrouselItems = isBookmarked(CARROUSEL_ITEMS.items)
   const gridItems = isBookmarked(GRID_ITEMS.items)

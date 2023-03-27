@@ -2,9 +2,10 @@
 /* eslint-disable space-before-function-paren */
 import { useEffect, useRef, useState } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { DB_NAMES } from '../storage/enpoints'
 
 function useBookmark() {
-  const myBookmarks = useLocalStorage([])
+  const myBookmarks = useLocalStorage([], DB_NAMES.BOOKMAKRS)
   const [searchBookmark, setSearchBookmark] = useState('')
   const [showBM, setShowBM] = useState([])
   const firstRender = useRef(null)

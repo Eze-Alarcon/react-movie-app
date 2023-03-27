@@ -3,13 +3,16 @@
 import { useEffect, useState } from 'react'
 import { mapData } from '../utils/mapData'
 
-function useFetch(endpoint) {
-  const [items, setItems] = useState([])
+function useFetch(endpoint, cache) {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
   const [controller, setController] = useState(null)
 
   useEffect(() => {
+    if (cache.items.length > 0) {
+      console.log('items saved')
+      return
+    }
     const abortController = new AbortController()
     setController(abortController)
     setLoading(true)
@@ -17,7 +20,7 @@ function useFetch(endpoint) {
     fetch(endpoint)
       .then(res => res.json())
       .then(rawData => mapData(rawData.results))
-      .then(data => setItems(data))
+      .then(data => cache.save(data))
       .catch((e) => {
         if (e.name === 'AbortError') {
           console.log('Request Cancelled')
@@ -38,7 +41,7 @@ function useFetch(endpoint) {
   }
 
   return {
-    items,
+    items: cache.items,
     error,
     loading,
     handleCancelRequest

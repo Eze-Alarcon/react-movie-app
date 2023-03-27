@@ -1,6 +1,5 @@
 /* eslint space-before-function-paren: 0 */
 import { useEffect, useState } from 'react'
-// const DB_NAME = 'BOOKMARKS_V1'
 
 function useLocalStorage(initialValue, DB_NAME) {
   const [items, setItems] = useState([])
