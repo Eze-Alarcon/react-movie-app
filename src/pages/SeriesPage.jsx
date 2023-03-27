@@ -7,7 +7,8 @@ import { API_ENDPOINTS } from '../storage/enpoints'
 import { useFetch } from '../hooks/useFetch'
 
 function SeriesPage({ removeBookmark, bookmarkItem, isBookmarked, cache }) {
-  const DATA = useFetch(API_ENDPOINTS.SERIES, cache)
+  const mediaType = 'tv'
+  const DATA = useFetch(API_ENDPOINTS.SERIES, cache, mediaType)
   const showSeries = isBookmarked(DATA.items)
 
   return (

@@ -19,8 +19,7 @@ function useBookmark() {
       (item) => item.id === mapItem.id
     )
     if (alreadySaved) return
-    const newItems = [...myBookmarks.items]
-    newItems.push(mapItem)
+    const newItems = [...myBookmarks.items, mapItem]
     myBookmarks.save(newItems)
   }
 
@@ -43,25 +42,22 @@ function useBookmark() {
   }
 
   useEffect(() => {
-    const arr = [...myBookmarks.items]
-    setShowBM(arr)
-
-    if (searchBookmark.length <= 3) return
-
-    const filter = arr.filter((item) =>
-      item.title.toLowerCase().includes(searchBookmark)
-    )
-
-    setShowBM(filter)
-  }, [searchBookmark])
-
-  useEffect(() => {
     if (firstRender.current === null && myBookmarks.items.length > 0) {
       firstRender.current = true
       const arr = [...myBookmarks.items]
-      setShowBM(arr)
+      if (searchBookmark.length <= 3) {
+        setShowBM(arr)
+        return
+      }
+      const filter = arr.filter((item) =>
+        item.title.toLowerCase().includes(searchBookmark)
+      )
+
+      setShowBM(filter)
+    } else if (firstRender.current) {
+      firstRender.current = null
     }
-  }, [myBookmarks])
+  }, [myBookmarks, searchBookmark])
 
   const states = {
     myBookmarks: myBookmarks.items,

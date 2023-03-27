@@ -5,7 +5,7 @@
 import config from '../storage/config.json'
 const backupImage = '/images/image-not-found.jpg'
 
-function mapData(rawData) {
+function mapData(rawData, type = 'movie') {
   const { images } = config
 
   if (!Array.isArray(rawData)) throw new Error('Wrong data type entry')
@@ -13,7 +13,7 @@ function mapData(rawData) {
   const mapData = rawData.map((item) => {
     const mappedDate = item.release_date ?? item.first_air_date
     const mappedTitle = item.title ?? item.name
-    const mappedType = item.media_type ?? 'movie'
+    const mappedType = item.media_type ?? type
     const mappedVotes = item.vote_average.toFixed(1)
     const mappedSaved = false
     let mappedImg = ''
