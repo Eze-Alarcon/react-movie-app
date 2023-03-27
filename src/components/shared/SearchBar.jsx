@@ -3,11 +3,8 @@
 
 import React from 'react'
 import { IconSearch } from '../../resources/svg/IconSearch'
-// import { MovieContext } from '../../context/MovieContext'
 
 function SearchBar({ holder, name }) {
-  // const { handleSearch } = useContext(MovieContext)
-
   function handleSubmit(event) {
     event.preventDefault()
   }
