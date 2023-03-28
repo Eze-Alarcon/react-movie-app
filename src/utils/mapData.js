@@ -37,4 +37,56 @@ function mapData(rawData, type = 'movie') {
   })
   return mapData
 }
-export { mapData }
+
+function mapDetails(rawData = {
+  number_of_episodes: 9,
+  number_of_seasons: 1
+}, type = 'movie',) {
+  const { images } = config
+
+  const mappedDate = rawData.release_date ?? rawData.first_air_date
+  const mappedTitle = rawData.original_title ?? rawData.original_name
+  const mappedType = type
+  const mappedVotes = rawData.vote_average.toFixed(1)
+  const language = rawData.original_language
+  const description = rawData.overview
+  const duration = rawData.runtime ?? rawData.episode_run_time.toString()
+  const itemStatus = rawData.status
+  const voteCount = rawData.vote_count
+  const itemgenres = rawData.genres.map((gen) => gen.name)
+  let mappedImg = ''
+
+  let serieSeasons = ''
+  let serieEpisodes = ''
+
+  if (type !== 'movie') {
+    serieSeasons = rawData.number_of_seasons
+    serieEpisodes = rawData.number_of_episodes
+  }
+
+  if (rawData.backdrop_path === null && rawData.poster_path === null) {
+    mappedImg = backupImage
+  } else {
+    const img = rawData.backdrop_path ?? rawData.poster_path
+    mappedImg = `${images.secure_base_url}${images.backdrop_sizes.at(-1)}${img}`
+  }
+
+  return {
+    imgPath: mappedImg,
+    date: mappedDate.substring(0, 4),
+    votes: mappedVotes,
+    title: mappedTitle,
+    type: mappedType,
+    id: rawData.id,
+    language,
+    description,
+    duration,
+    itemStatus,
+    voteCount,
+    itemgenres,
+    serieSeasons,
+    serieEpisodes
+  }
+}
+
+export { mapData, mapDetails }

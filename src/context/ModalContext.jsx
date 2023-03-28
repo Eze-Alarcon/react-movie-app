@@ -13,6 +13,7 @@ function ModalProvider({ children }) {
 
   function openModal(movieID) {
     SetModalStatus({ open: true, movieID })
+    console.log(movieID)
   }
 
   function closeModal() {
