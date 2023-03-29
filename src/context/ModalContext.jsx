@@ -9,7 +9,7 @@ const ModalContext = createContext(false)
 function ModalProvider({ children }) {
   const DETAILS = useFetchDetails()
   const [modalStatus, SetModalStatus] = useState({
-    open: true,
+    open: false,
     movieID: null,
   })
 

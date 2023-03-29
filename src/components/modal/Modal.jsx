@@ -27,10 +27,7 @@ function Modal() {
       y: '0',
       opacity: 1,
       transition: {
-        duration: 3,
-        type: 'spring',
-        damping: 25,
-        stiffness: 500,
+        duration: 0.3,
       },
     },
     exit: {
