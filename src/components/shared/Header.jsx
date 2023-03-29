@@ -15,12 +15,12 @@ function Header() {
   return (
     <header
       id='header_container'
-      className='w-full h-14 md:h-[72px] flex justify-center lg:flex-col lg:px-0  relative'
+      className='w-full h-14 md:h-[72px] lg:h-[100svh] flex justify-center lg:flex-col lg:px-0  relative'
     >
       <div className='h-14 md:h-[72px] w-full relative z-40 lg:h-full'>
         <div
           id='sticky'
-          className='max-w-full h-14 fixed top-0 pt-6 bg-black lg:pt-0 lg:left-0 lg:pl-6'
+          className='max-w-full h-14 fixed top-0 pt-6 bg-black lg:left-0 lg:pl-6'
         >
           <nav className='bg-darkBlue h-14 w-full flex justify-between items-center px-4 md:h-[72px] rounded-xl lg:h-full lg:w-[92px] lg:flex-col lg:py-8 lg:gap-20'>
             <div className='h-7 aspect-square md:h-8'>
