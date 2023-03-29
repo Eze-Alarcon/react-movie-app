@@ -1,29 +1,38 @@
 /* eslint-disable space-before-function-paren */
 import React from 'react'
 import { motion } from 'framer-motion'
+import DATA from '../../mocks/map.json'
 
 function ModalContent({ onClose, dropIn, loading, error, details }) {
   return (
     <motion.div
-      className='w-full h-full bg-black z-50 grid place-content-center top-0 bottom-0 left-0 right-0 bg-opacity-50'
-      onClick={onClose}
+      className='h-0 relative z-50'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
       <motion.div
-        className='md:w-full p-4 bg-darkBlue grid place-content-center top-1/2 left-1/2 right-1/2 bg-opacity-50'
-        variants={dropIn}
-        initial='hidden'
-        animate='visible'
-        exit='exit'
-        onClick={(event) => event.stopPropagation()}
+        className='w-full h-screen bg-darkBlue grid place-content-center bg-opacity-50 fixed top-0'
+        onClick={onClose}
       >
         {loading && !error && <p>Loading data...</p>}
         {!loading && error && <p>There was an error...</p>}
         {!loading && !error && (
-          <motion.div className='text-white text-xl'>
-            <p>{details.title}</p>
+          <motion.div
+            variants={dropIn}
+            initial='hidden'
+            animate='visible'
+            exit='exit'
+            className='text-white text-xl w-full mx-auto bg-blue'
+          >
+            <div className='w-full aspect-video mx-auto'>
+              {/* <img
+                src={DATA.imgPath}
+                alt={`poster of ${DATA.title}`}
+                className='w-full aspect-video object-cover rounded-lg selection:bg-transparent'
+              /> */}
+            </div>
+            <p>{DATA.title}</p>
             <button className='bg-red' onClick={onClose}>
               Close
             </button>

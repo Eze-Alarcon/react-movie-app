@@ -17,7 +17,7 @@ function Header() {
       id='header_container'
       className='w-full h-14 md:h-[72px] flex justify-center lg:flex-col lg:px-0  relative'
     >
-      <div className='h-14 md:h-[72px] w-full relative z-50 lg:h-full'>
+      <div className='h-14 md:h-[72px] w-full relative z-40 lg:h-full'>
         <div
           id='sticky'
           className='max-w-full h-14 fixed top-0 pt-6 bg-black lg:pt-0 lg:left-0 lg:pl-6'

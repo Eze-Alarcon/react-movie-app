@@ -11,6 +11,7 @@ import { ModalContent } from './ModalContent'
 function Modal() {
   const { closeModal, modalStatus, loading, error, details } =
     useContext(ModalContext)
+  const modalContainer = document.getElementById('modalContainer')
 
   function close(event) {
     event.stopPropagation()
@@ -26,7 +27,7 @@ function Modal() {
       y: '0',
       opacity: 1,
       transition: {
-        duration: 0.1,
+        duration: 3,
         type: 'spring',
         damping: 25,
         stiffness: 500,
@@ -50,7 +51,7 @@ function Modal() {
               error={error}
               details={details}
             />,
-            document.body
+            modalContainer
           )}
         </>
       ) : null}
