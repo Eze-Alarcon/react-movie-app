@@ -11,7 +11,7 @@ function mapData(rawData, type = 'movie') {
   if (!Array.isArray(rawData)) throw new Error('Wrong data type entry')
 
   const mapData = rawData.map((item) => {
-    const mappedDate = item.release_date ?? item.first_air_date
+    const mappedDate = item.release_date?.substring(0, 4) ?? item.first_air_date?.substring(0, 4) ?? 'In development'
     const mappedTitle = item.title ?? item.name
     const mappedType = item.media_type ?? type
     const mappedVotes = item.vote_average.toFixed(1)
@@ -27,7 +27,7 @@ function mapData(rawData, type = 'movie') {
 
     return {
       imgPath: mappedImg,
-      date: mappedDate.substring(0, 4),
+      date: mappedDate,
       votes: mappedVotes,
       title: mappedTitle,
       type: mappedType,
@@ -41,7 +41,7 @@ function mapData(rawData, type = 'movie') {
 function mapDetails(rawData, type = 'movie',) {
   const { images } = config
 
-  const mappedDate = rawData.release_date ?? rawData.first_air_date
+  const mappedDate = rawData.release_date?.substring(0, 4) ?? rawData.first_air_date?.substring(0, 4)
   const mappedTitle = rawData.original_title ?? rawData.original_name
   const mappedType = type
   const mappedVotes = rawData.vote_average.toFixed(1)
@@ -70,7 +70,7 @@ function mapDetails(rawData, type = 'movie',) {
 
   return {
     imgPath: mappedImg,
-    date: mappedDate.substring(0, 4),
+    date: mappedDate,
     votes: mappedVotes,
     title: mappedTitle,
     type: mappedType,

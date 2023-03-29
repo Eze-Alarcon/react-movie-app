@@ -19,7 +19,9 @@ function useFetch(endpoint, cache, itemsType) {
       .then(res => res.json())
       .then(rawData => mapData(rawData.results, itemsType))
       .then(data => cache.save(data))
-      .catch((e) => setError(true))
+      .catch((e) => {
+        setError(true)
+      })
       .finally(() => setLoading(false))
 
     return () => abortController.abort()
