@@ -2,10 +2,10 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
-function ModalContent({ onClose, dropIn }) {
+function ModalContent({ onClose, dropIn, loading, error, details }) {
   return (
     <motion.div
-      className='w-full h-full bg-black absolute z-50 grid place-content-center top-0 bottom-0 left-0 right-0 bg-opacity-50'
+      className='w-full h-full bg-black z-50 grid place-content-center top-0 bottom-0 left-0 right-0 bg-opacity-50'
       onClick={onClose}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -19,14 +19,16 @@ function ModalContent({ onClose, dropIn }) {
         exit='exit'
         onClick={(event) => event.stopPropagation()}
       >
-        <motion.div className='text-white text-xl'>
-          <p>
-            titulo: insertar llamado a la API para buscar datos de esta pelicula
-          </p>
-          <button className='bg-red' onClick={onClose}>
-            Close
-          </button>
-        </motion.div>
+        {loading && !error && <p>Loading data...</p>}
+        {!loading && error && <p>There was an error...</p>}
+        {!loading && !error && (
+          <motion.div className='text-white text-xl'>
+            <p>{details.title}</p>
+            <button className='bg-red' onClick={onClose}>
+              Close
+            </button>
+          </motion.div>
+        )}
       </motion.div>
     </motion.div>
   )

@@ -38,10 +38,7 @@ function mapData(rawData, type = 'movie') {
   return mapData
 }
 
-function mapDetails(rawData = {
-  number_of_episodes: 9,
-  number_of_seasons: 1
-}, type = 'movie',) {
+function mapDetails(rawData, type = 'movie',) {
   const { images } = config
 
   const mappedDate = rawData.release_date ?? rawData.first_air_date

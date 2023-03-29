@@ -9,7 +9,8 @@ import { createPortal } from 'react-dom'
 import { ModalContent } from './ModalContent'
 
 function Modal() {
-  const { closeModal, modalStatus } = useContext(ModalContext)
+  const { closeModal, modalStatus, loading, error, details } =
+    useContext(ModalContext)
 
   function close(event) {
     event.stopPropagation()
@@ -42,7 +43,13 @@ function Modal() {
       {modalStatus.open ? (
         <>
           {createPortal(
-            <ModalContent onClose={close} dropIn={dropIn} />,
+            <ModalContent
+              onClose={close}
+              dropIn={dropIn}
+              loading={loading}
+              error={error}
+              details={details}
+            />,
             document.body
           )}
         </>
