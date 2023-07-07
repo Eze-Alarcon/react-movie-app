@@ -1,9 +1,7 @@
-/* eslint-disable space-before-function-paren */
-
 import { DB_NAMES } from '../storage/contants'
 import { useSessionStorage } from './useSessionStorage'
 
-function useStorages() {
+function useStorages () {
   const trendingWeekCache = useSessionStorage([], DB_NAMES.TRENDING_WEEK)
   const trendingDayCache = useSessionStorage([], DB_NAMES.TRENDING_DAY)
   const moviesCache = useSessionStorage([], DB_NAMES.MOVIES)

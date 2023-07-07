@@ -1,9 +1,7 @@
-/* eslint-disable space-before-function-paren */
-
 import { useEffect, useState } from 'react'
 import { mapData } from '../utils/mapData'
 
-function useFetchSearch({ endpoint, mediaType, query }) {
+function useFetchSearch ({ endpoint, mediaType, query }) {
   const [data, setData] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)

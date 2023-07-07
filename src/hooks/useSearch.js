@@ -1,13 +1,11 @@
-/* eslint-disable space-before-function-paren */
-
 import { useState, useMemo } from 'react'
 import { debounceFunction } from '../utils/debounce'
 
-function useSearch() {
+function useSearch () {
   const [searchedValue, setSearchedValue] = useState('')
   const [query, setQuery] = useState('')
 
-  function handleSearch(event) {
+  function handleSearch (event) {
     event.preventDefault()
     const input = event.target.value.toLowerCase().trimStart()
     setSearchedValue(input)
@@ -15,7 +13,7 @@ function useSearch() {
   }
 
   const debounceQuery = useMemo(function () {
-    function memoQuery(query) {
+    function memoQuery (query) {
       setQuery(query)
     }
 

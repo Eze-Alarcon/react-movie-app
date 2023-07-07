@@ -1,17 +1,14 @@
-/* eslint-disable multiline-ternary */
-/* eslint space-before-function-paren: 0 */
-
 import React from 'react'
 import IconLogo from '../../resources/svg/IconLogo'
 
 /*
-  TO DO:
+  TO-DO:
   * Show error message on form
   * Do something with the form on submit
 */
 
-function Form({ login }) {
-  function handleSubmit(e) {
+function Form ({ login }) {
+  function handleSubmit (e) {
     e.preventDefault()
   }
   return (
@@ -41,9 +38,7 @@ function Form({ login }) {
               placeholder='Password'
               className='w-full form-input bg-darkBlue outline-none border-0 border-b-2 focus:ring-0 focus:border-white hover:cursor-pointer'
             />
-            {login ? (
-              <></>
-            ) : (
+            {!login && (
               <input
                 type='password'
                 name='repeatpassword'
@@ -61,15 +56,9 @@ function Form({ login }) {
           </form>
           <div className='flex justify-center space-x-2'>
             <p>{login ? "Don't" : 'Already'} have an account?</p>
-            {login ? (
-              <a href='#.' className='text-red'>
-                Sign Up
-              </a>
-            ) : (
-              <a href='#.' className='text-red'>
-                L ogin
-              </a>
-            )}
+            {login
+              ? <a href='#.' className='text-red'>Sign Up</a>
+              : <a href='#.' className='text-red'>Login</a>}
           </div>
         </article>
       </section>

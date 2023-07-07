@@ -1,9 +1,6 @@
-/* eslint-disable comma-dangle */
-/* eslint space-before-function-paren: 0 */
-
 import { IconSearch } from '../../resources/svg/IconSearch'
 
-function SearchBar({ holder, name, multiSearch, searchedValue }) {
+function SearchBar ({ holder, name, multiSearch, searchedValue }) {
   return (
     <>
       <form action='' className='flex w-full'>

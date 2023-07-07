@@ -1,7 +1,6 @@
-/* eslint space-before-function-paren: 0 */
 import React from 'react'
 
-function Mark({ marked }) {
+function Mark ({ marked }) {
   return (
     <svg
       width='12'

@@ -1,8 +1,6 @@
-/* eslint space-before-function-paren: 0 */
-
 import React from 'react'
 
-function Grid({ children, title }) {
+function Grid ({ children, title }) {
   return (
     <article className='space-y-6'>
       <div className='w-full'>

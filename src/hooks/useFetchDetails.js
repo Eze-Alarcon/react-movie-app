@@ -1,16 +1,14 @@
-/* eslint-disable space-before-function-paren */
-
 import { useState } from 'react'
 import { mapDetails } from '../utils/mapData'
 import { GET_DETAILS } from '../storage/contants'
 
-function useFetchDetails() {
+function useFetchDetails () {
   const [data, setData] = useState({})
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
   const [controller, setController] = useState(null)
 
-  async function callAPI(movieID, itemsType) {
+  async function callAPI (movieID, itemsType) {
     const abortController = new AbortController()
     setController(abortController)
     setLoading(true)
@@ -29,7 +27,7 @@ function useFetchDetails() {
     }
   }
 
-  function handleCancelRequest() {
+  function handleCancelRequest () {
     if (controller) {
       controller.abort()
     }

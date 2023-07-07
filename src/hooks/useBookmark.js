@@ -1,19 +1,17 @@
-/* eslint-disable comma-dangle */
-/* eslint-disable space-before-function-paren */
 import { useEffect, useRef, useState } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { DB_NAMES } from '../storage/contants'
 
-function useBookmark() {
+function useBookmark () {
   const myBookmarks = useLocalStorage([], DB_NAMES.BOOKMAKRS)
   const [searchBookmark, setSearchBookmark] = useState('')
   const [showBM, setShowBM] = useState([])
   const firstRender = useRef(null)
 
-  function bookmarkItem(item) {
+  function bookmarkItem (item) {
     const mapItem = {
       ...item,
-      saved: true,
+      saved: true
     }
     const alreadySaved = myBookmarks.items.some(
       (item) => item.id === mapItem.id
@@ -23,19 +21,19 @@ function useBookmark() {
     myBookmarks.save(newItems)
   }
 
-  function isBookmarked(arr) {
+  function isBookmarked (arr) {
     if (!Array.isArray(arr)) return
     const checkSaved = arr.map((item) => {
       const bookmarked = myBookmarks.items.some((el) => el.id === item.id)
       return {
         ...item,
-        saved: bookmarked,
+        saved: bookmarked
       }
     })
     return checkSaved
   }
 
-  function handleSearch(event) {
+  function handleSearch (event) {
     event.preventDefault()
     const val = event.target.value.toLowerCase().trimStart()
     setSearchBookmark(val)
@@ -69,7 +67,7 @@ function useBookmark() {
     bookmarkItem,
     removeBookmark: myBookmarks.remove,
     isBookmarked,
-    handleSearch,
+    handleSearch
   }
 
   return { ...states, ...functions }

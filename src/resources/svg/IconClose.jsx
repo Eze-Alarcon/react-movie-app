@@ -1,5 +1,4 @@
-/* eslint-disable space-before-function-paren */
-function IconClose() {
+function IconClose () {
   return (
     <svg
       viewBox='0 0 24 24'

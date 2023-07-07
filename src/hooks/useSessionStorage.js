@@ -1,7 +1,6 @@
-/* eslint space-before-function-paren: 0 */
 import { useEffect, useState } from 'react'
 
-function useSessionStorage(initialValue, DB_NAME) {
+function useSessionStorage (initialValue, DB_NAME) {
   const [items, setItems] = useState([])
 
   useEffect(() => {
@@ -18,12 +17,12 @@ function useSessionStorage(initialValue, DB_NAME) {
     setItems(parsedItem)
   }, [])
 
-  function save(newItem) {
+  function save (newItem) {
     window.sessionStorage.setItem(DB_NAME, JSON.stringify(newItem))
     setItems(newItem)
   }
 
-  function remove(movieID) {
+  function remove (movieID) {
     const newItems = [...items]
     const searchIndex = newItems.findIndex((el) => el.id === movieID)
 

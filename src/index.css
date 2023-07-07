@@ -5,3 +5,22 @@
 .swiper-slide {
   @apply h-full w-max aspect-video relative rounded-lg hover:cursor-pointer selection:bg-transparent;
 }
+
+#sticky {
+  width: calc(100% - 24px - 24px);
+}
+
+.customWidth {
+  width: calc(100vw - 24px - 24px);
+}
+
+@media screen and (min-width: 1024px) {
+  #sticky {
+    height: calc(100% - 24px - 24px);
+    width: 92px;
+  }
+
+  .customWidth {
+    width: calc(100vw - 24px - 24px - 72px - 24px - 24px);
+  }
+}

@@ -1,15 +1,13 @@
-/* eslint space-before-function-paren: 0 */
-
 import React, { useContext, useEffect, useState } from 'react'
 import { MovieInfo } from './MovieInfo'
 import { Mark } from '../../resources/svg/movies/IconsBookmarks'
 import { ModalContext } from '../../context/ModalContext'
 
-function MoviePoster({ movie, deleteItem, saveItem }) {
+function MoviePoster ({ movie, deleteItem, saveItem }) {
   const [marked, setMarked] = useState(() => movie.saved)
   const { openModal } = useContext(ModalContext)
 
-  function handleClick() {
+  function handleClick () {
     if (!marked) {
       saveItem(movie)
     } else {

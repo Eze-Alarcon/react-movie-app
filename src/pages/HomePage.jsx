@@ -1,6 +1,3 @@
-/* eslint space-before-function-paren: 0 */
-/* eslint-disable comma-dangle */
-
 import { HomeLayout } from '../layout/HomeLayout'
 import { Carrousel } from '../layout/Carrousel'
 import { Grid } from '../layout/Grid'
@@ -12,19 +9,19 @@ import { API_ENDPOINTS, SEARCH_ENDPOINTS } from '../storage/contants'
 import { useSearch } from '../hooks/useSearch'
 import { useFetchSearch } from '../hooks/useFetchSearch'
 
-function HomePage({
+function HomePage ({
   removeBookmark,
   bookmarkItem,
   isBookmarked,
   carrouselCache,
-  gridCache,
+  gridCache
 }) {
   const { handleSearch, searchedValue, query } = useSearch()
   let searchedItems = []
 
   const SEARCH_FETCH = useFetchSearch({
     endpoint: SEARCH_ENDPOINTS.MULTI_SEARCH,
-    query,
+    query
   })
 
   const CARROUSEL_ITEMS = useFetch(API_ENDPOINTS.TRENDING_DAY, carrouselCache)

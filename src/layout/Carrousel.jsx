@@ -1,6 +1,3 @@
-/* eslint space-before-function-paren: 0 */
-/* eslint-disable comma-dangle */
-
 import React from 'react'
 
 // Swipper slider
@@ -10,7 +7,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/free-mode'
 
-function Carrousel({ children }) {
+function Carrousel ({ children }) {
   return (
     <article className='space-y-6'>
       <div className='w-full'>
@@ -22,13 +19,13 @@ function Carrousel({ children }) {
           loop
           breakpoints={{
             0: {
-              freeMode: true,
+              freeMode: true
             },
             1024: {
               freeMode: false,
               centeredSlides: false,
-              navigation: true,
-            },
+              navigation: true
+            }
           }}
           slidesPerView='auto'
           spaceBetween={16}

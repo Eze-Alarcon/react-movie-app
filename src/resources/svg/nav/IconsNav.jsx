@@ -1,7 +1,6 @@
-/* eslint space-before-function-paren: 0 */
 import React from 'react'
 
-function IconBookmark({ className }) {
+function IconBookmark ({ className }) {
   return (
     <svg
       width='20'
@@ -15,7 +14,7 @@ function IconBookmark({ className }) {
   )
 }
 
-function IconHome({ className }) {
+function IconHome ({ className }) {
   return (
     <svg
       width='20'
@@ -29,7 +28,7 @@ function IconHome({ className }) {
   )
 }
 
-function IconMovie({ className }) {
+function IconMovie ({ className }) {
   return (
     <svg
       width='20'
@@ -43,7 +42,7 @@ function IconMovie({ className }) {
   )
 }
 
-function IconTv({ className }) {
+function IconTv ({ className }) {
   return (
     <svg
       width='20'

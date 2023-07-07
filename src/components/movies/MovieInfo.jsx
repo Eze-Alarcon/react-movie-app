@@ -1,13 +1,10 @@
-/* eslint space-before-function-paren: 0 */
-/* eslint-disable comma-dangle */
-
 import React from 'react'
 import {
   CategoryMovie,
-  CategoryTv,
+  CategoryTv
 } from '../../resources/svg/movies/IconsCategories'
 
-function MovieInfo({ info }) {
+function MovieInfo ({ info }) {
   return (
     <>
       <div className='flex items-center gap-3 font-light opacity-75 text-sm'>

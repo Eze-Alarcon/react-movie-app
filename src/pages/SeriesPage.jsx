@@ -1,6 +1,3 @@
-/* eslint-disable comma-dangle */
-/* eslint space-before-function-paren: 0 */
-
 import React from 'react'
 import { SectionLayout } from '../layout/SectionLayout'
 import { Grid } from '../layout/Grid'
@@ -11,17 +8,17 @@ import { useFetchSearch } from '../hooks/useFetchSearch'
 import {
   API_ENDPOINTS,
   MEDIA_TYPES,
-  SEARCH_ENDPOINTS,
+  SEARCH_ENDPOINTS
 } from '../storage/contants'
 
-function SeriesPage({ removeBookmark, bookmarkItem, isBookmarked, cache }) {
+function SeriesPage ({ removeBookmark, bookmarkItem, isBookmarked, cache }) {
   const { handleSearch, searchedValue, query } = useSearch()
   let searchedItems = []
 
   const SEARCH_FETCH = useFetchSearch({
     endpoint: SEARCH_ENDPOINTS.SERIES,
     mediaType: MEDIA_TYPES.SERIE,
-    query,
+    query
   })
   const DATA = useFetch(API_ENDPOINTS.SERIES, cache, MEDIA_TYPES.SERIE)
 

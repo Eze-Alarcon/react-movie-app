@@ -1,8 +1,6 @@
-/* eslint space-before-function-paren: 0 */
-
 import React from 'react'
 
-function IconPlay() {
+function IconPlay () {
   return (
     <svg
       width='30'

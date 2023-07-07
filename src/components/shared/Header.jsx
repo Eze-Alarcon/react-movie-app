@@ -1,17 +1,14 @@
-/* eslint-disable comma-dangle */
-/* eslint space-before-function-paren: 0 */
-
 import React from 'react'
 import { IconLogo } from '../../resources/svg/IconLogo'
 import {
   IconBookmark,
   IconHome,
   IconMovie,
-  IconTv,
+  IconTv
 } from '../../resources/svg/nav/IconsNav'
 import { Link, NavLink } from 'react-router-dom'
 
-function Header() {
+function Header () {
   return (
     <header
       id='header_container'

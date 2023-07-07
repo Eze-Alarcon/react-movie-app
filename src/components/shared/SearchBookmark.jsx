@@ -1,10 +1,7 @@
-/* eslint-disable comma-dangle */
-/* eslint space-before-function-paren: 0 */
-
 import React from 'react'
 import { IconSearch } from '../../resources/svg/IconSearch'
 
-function SearchBookmark({ holder, handleSearch, searchBookmark }) {
+function SearchBookmark ({ holder, handleSearch, searchBookmark }) {
   return (
     <>
       <form action='' className='flex w-full'>

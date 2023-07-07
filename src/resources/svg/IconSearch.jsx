@@ -1,8 +1,6 @@
-/* eslint space-before-function-paren: 0 */
-
 import React from 'react'
 
-function IconSearch() {
+function IconSearch () {
   return (
     <svg
       width='32'

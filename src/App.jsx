@@ -1,6 +1,3 @@
-/* eslint-disable comma-dangle */
-/* eslint space-before-function-paren: 0 */
-
 import React from 'react'
 // Context
 import { ModalProvider } from './context/ModalContext'
@@ -15,7 +12,7 @@ import { Modal } from './components/modal/Modal'
 import { useBookmark } from './hooks/useBookmark'
 import { useStorages } from './hooks/useStorages'
 
-function App() {
+function App () {
   const {
     myBookmarks,
     searchBookmark,
@@ -23,7 +20,7 @@ function App() {
     removeBookmark,
     bookmarkItem,
     isBookmarked,
-    handleSearch,
+    handleSearch
   } = useBookmark()
   const { moviesCache, seriesCache, trendingDayCache, trendingWeekCache } =
     useStorages()

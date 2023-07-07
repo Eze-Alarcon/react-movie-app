@@ -1,17 +1,15 @@
-/* eslint-disable comma-dangle */
-/* eslint space-before-function-paren: 0 */
 import React from 'react'
 import { SectionLayout } from '../layout/SectionLayout'
 import { Grid } from '../layout/Grid'
 import { MovieCard } from '../components/movies/MovieCard'
 
-function BookmarkPages({
+function BookmarkPages ({
   removeBookmark,
   bookmarkItem,
   myBookmarks,
   handleSearch,
   searchBookmark,
-  filteredBookmarks,
+  filteredBookmarks
 }) {
   const hasBookmarks = myBookmarks?.length > 0
 

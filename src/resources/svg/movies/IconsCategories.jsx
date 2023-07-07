@@ -1,7 +1,6 @@
-/* eslint space-before-function-paren: 0 */
 import React from 'react'
 
-function CategoryMovie() {
+function CategoryMovie () {
   return (
     <svg
       width='12'
@@ -15,7 +14,7 @@ function CategoryMovie() {
   )
 }
 
-function CategoryTv() {
+function CategoryTv () {
   return (
     <svg
       width='12'

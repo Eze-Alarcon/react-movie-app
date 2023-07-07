@@ -1,47 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon-32x32.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;500&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        height: 100svh;
-      }
 
-      #sticky {
-        width: calc(100% - 24px - 24px);
-      }
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon-32x32.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;500&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      height: 100svh;
+    }
+  </style>
+  <title>Entertainment web app</title>
+</head>
 
-      .customWidth {
-        width: calc(100vw - 24px - 24px);
-      }
+<body class="bg-black font-Outfit text-white">
+  <div id="modalContainer" class="w-full h-0 relative top-0 z-50"></div>
+  <div id="root" class="h-full grid lg:grid-cols-page gap-6 p-6 place-content-start"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
 
-      @media screen and (min-width: 1024px) {
-        #sticky {
-          height: calc(100% - 24px - 24px);
-          width: 92px;
-        }
-
-        .customWidth {
-          width: calc(100vw - 24px - 24px - 72px - 24px - 24px);
-        }
-      }
-    </style>
-    <title>Vite + React</title>
-  </head>
-  <body class="bg-black font-Outfit text-white">
-    <div id="modalContainer" class="w-full h-0 relative top-0 z-50"></div>
-    <div
-      id="root"
-      class="h-full grid lg:grid-cols-page gap-6 p-6 place-content-start"
-    ></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
 </html>

@@ -1,7 +1,6 @@
-/* eslint space-before-function-paren: 0 */
 import React from 'react'
 
-function IconLogo() {
+function IconLogo () {
   return (
     <svg
       width='33'
